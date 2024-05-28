@@ -6,7 +6,7 @@
 #    By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 17:17:55 by mganchev          #+#    #+#              #
-#    Updated: 2024/05/24 01:11:33 by mganchev         ###   ########.fr        #
+#    Updated: 2024/05/28 23:24:18 by mganchev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,24 +29,21 @@ $(SRCDIR)/so_long_utils.c
 OBJS = $(OBJDIR)/main.o $(OBJDIR)/game_win.o $(OBJDIR)/mouse_events.o $(OBJDIR)/sprites.o \
 $(OBJDIR)/so_long_utils.o # $(OBJDIR)/get_next_line.o $(OBJDIR)/get_next_line_utils.o
 
-$(OBJDIR):
-	@mkdir -p $(OBJDIR)
 	
 all: $(OBJDIR) $(NAME)
+
+$(OBJDIR):
+	@mkdir -p $(OBJDIR)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -I$(INCLUDE) -I$(LIBFT) -I$(MLX) -c $< -o $@
 
-${NAME}: libft mlx $(OBJS)
-	$(CC) $(CFLAGS) -L$(MLX) -L$(LIBFT) $(OBJS) -lXext -lX11 -lm -lmlx -lft -o $(NAME)
-
-libft:
+${NAME}: $(OBJS)
 	@make -C $(LIBFT)
 	@make -C $(LIBFT) bonus
-
-mlx:
 	@make -C $(MLX)
+	$(CC) $(CFLAGS) -L$(MLX) -L$(LIBFT) $(OBJS) -lXext -lX11 -lm -lmlx -lft -o $(NAME)
 
 clean:
 	@make clean -C $(MLX)
