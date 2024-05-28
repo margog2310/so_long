@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/05/24 01:26:22 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/05/28 23:00:30 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,19 @@
 # define S 115
 # define D 100
 
-# define SPACE 0
-# define WALL 1
+# define SPACE '0'
+# define WALL '1'
 # define COIN 'C'
 # define EXIT 'E'
 # define START 'P'
 
+//sprites
 # define MARIO "./assets/small-mario.xpm"
-
+//map tiles 
+# define PLATFORM "./assets/block.xpm"
+# define COLLECTIBLE "./assets/coin.xpm"
+# define ENTER "./assets/pipe.xpm"
+# define FINISH //draw castle or flag pole basically (rip)
 typedef struct s_img
 {
 	void	*mlx;
@@ -60,11 +65,6 @@ typedef struct s_bgn
 // then you use mlx_put_img_to_win with those coordinates
 typedef struct s_map
 {
-	char	space;
-	char	coin;
-	char	wall;
-	char	exit;
-	char	start;
 	char	**grid;
 	int		x;
 	int		y;
@@ -99,8 +99,10 @@ int			mouse_event(int button, int x, int y, void *param);
 int			on_keypress(int keysym, t_game *img);
 // maps
 int			open_file(char *path);
+t_map		*read_file(int fd, t_map *map);
 int			free_file(char *buffer);
 int			close_file(int fd);
+void		free_grid(char **grid);
 // sprites
 t_img		*create_sprite(t_game *game, char *asset_path);
 t_img		*load_sprites(t_game *game);
