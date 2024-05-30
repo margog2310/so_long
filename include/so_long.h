@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/05/28 23:00:30 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/05/30 22:55:19 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 
@@ -36,13 +37,20 @@
 # define EXIT 'E'
 # define START 'P'
 
-//sprites
+// sprites
 # define MARIO "./assets/small-mario.xpm"
-//map tiles 
+// map tiles
 # define PLATFORM "./assets/block.xpm"
 # define COLLECTIBLE "./assets/coin.xpm"
 # define ENTER "./assets/pipe.xpm"
-# define FINISH //draw castle or flag pole basically (rip)
+# define FINISH // draw castle or flag pole basically (rip)
+
+typedef struct s_point
+{
+	int		x;
+	int		y;
+}			t_point;
+
 typedef struct s_img
 {
 	void	*mlx;
@@ -103,6 +111,11 @@ t_map		*read_file(int fd, t_map *map);
 int			free_file(char *buffer);
 int			close_file(int fd);
 void		free_grid(char **grid);
+bool		check_line_len(char **grid);
+bool		check_map_symbols(char **grid);
+bool		check_repeat(char **grid);
+bool		check_borders(char **grid);
+bool		check_path(char **grid);
 // sprites
 t_img		*create_sprite(t_game *game, char *asset_path);
 t_img		*load_sprites(t_game *game);
