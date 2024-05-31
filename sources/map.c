@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_grid.c                                         :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
+/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:29:49 by mganchev          #+#    #+#             */
-/*   Updated: 2024/05/28 22:04:27 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/05/31 01:55:30 by margo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,4 @@ t_map	*create_game_map(char *file_path, t_game *game)
 	if (!map)
 		return (close_window(game), NULL);
 	map = read_file(fd, map);
-    
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
+/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:35:26 by mganchev          #+#    #+#             */
-/*   Updated: 2024/05/24 01:30:57 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/05/31 02:05:56 by margo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_img	*create_sprite(t_game *game, char *asset_path)
 	mlx_put_image_to_window(game->mlx, game->win, sprite->xpm, 150, 150);
 	return (sprite);
 }
+
 t_img	*load_sprites(t_game *game)
 {
 	t_img	*mario_sprite;
@@ -37,6 +38,7 @@ t_img	*load_sprites(t_game *game)
 		return (close_window(game), NULL);
 	return (mario_sprite);
 }
+
 void	*destroy_sprite(t_img *sprite)
 {
 	if (sprite->xpm)

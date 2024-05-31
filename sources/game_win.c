@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_win.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
+/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:44:07 by mganchev          #+#    #+#             */
-/*   Updated: 2024/05/24 01:38:11 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/05/31 02:04:14 by margo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,13 @@ t_game	*new_window(int w, int h, char *str)
 	img = new_image(game);
 	if (!img)
 		return (close_window(game), NULL);
-	game->addr = mlx_get_data_addr(img->xpm, &game->bpp,
-			&game->line_len, &game->endian);
+	game->addr = mlx_get_data_addr(img->xpm, &game->bpp, &game->line_len,
+			&game->endian);
 	if (!load_sprites(game))
 		return (close_window(game), NULL);
 	return (game);
 }
+
 // move new_image and other related stuff into this function
 void	draw_bgn(t_bgn bgn, t_game *game)
 {
@@ -77,6 +78,7 @@ void	draw_bgn(t_bgn bgn, t_game *game)
 	}
 	mlx_put_image_to_window(game->mlx, game->win, img->xpm, 0, 0);
 }
+
 void	*free_images(t_img *img)
 {
 	if (img->xpm)

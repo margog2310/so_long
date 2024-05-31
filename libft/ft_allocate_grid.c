@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_events.c                                     :+:      :+:    :+:   */
+/*   ft_allocate_grid.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 17:32:45 by mganchev          #+#    #+#             */
-/*   Updated: 2024/05/31 02:03:20 by margo            ###   ########.fr       */
+/*   Created: 2024/05/31 01:33:32 by margo             #+#    #+#             */
+/*   Updated: 2024/05/31 01:37:25 by margo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "libft.h"
 
-int	mouse_event(int button, int x, int y, void *param)
+void	**allocate_grid(int rows, int cols, size_t size)
 {
-	(void)x;
-	(void)y;
-	(void)param;
-	return (ft_putnbr_fd(button, 1));
-}
+	int		i;
+	int		j;
+	void	**grid;
 
-int	on_keypress(int keysym, t_game *img)
-{
-	(void)img;
-	printf("Pressed key: %d\n", keysym);
-	return (0);
+	grid = malloc(rows * sizeof(void *));
+	if (grid == NULL)
+		return (NULL);
+	i = 0;
+	while (i < rows)
+	{
+		grid[i] = malloc(cols * size);
+		if (grid[i] == NULL)
+		{
+			j = 0;
+			while (j < i)
+				free(grid[j]);
+			free(grid);
+			return (NULL);
+		}
+	}
+	return (grid);
 }
