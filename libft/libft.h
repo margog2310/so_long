@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:00:24 by mganchev          #+#    #+#             */
-/*   Updated: 2024/05/31 01:40:04 by margo            ###   ########.fr       */
+/*   Updated: 2024/05/31 18:59:35 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int					ft_isalnum(int c);
 int					ft_isdigit(int c);
 int					ft_isalpha(int c);
 int					ft_atoi(const char *str);
+int					ft_strlen(const char *str);
 int					ft_power(int nb, int power);
 int					ft_puthexnbr(unsigned int nbr, int uppercase);
 int					ft_putchar_fd(char c, int fd);
@@ -56,7 +57,8 @@ void				ft_swap(int *a, int *b);
 void				ft_swap_char(char *a, char *b);
 void				ft_bzero(void *s, size_t n);
 void				ft_putendl_fd(char *s, int fd);
-void				**allocate_grid(int rows, int cols, size_t size);
+void				grid_size(char **grid, int *rows, int *cols);
+void				**ft_allocate_grid(int rows, int cols, size_t size);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
 void				*ft_calloc(size_t nmemb, size_t size);
 void				*ft_memchr(const void *s, int c, size_t n);
@@ -69,7 +71,6 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 size_t				ft_nbrlen(int n);
-size_t				ft_strlen(const char *str);
 size_t				ft_strlcat(char *dest, const char *src, size_t size);
 size_t				ft_strlcpy(char *dest, const char *src, size_t size);
 t_list				*ft_lstlast(t_list *lst);

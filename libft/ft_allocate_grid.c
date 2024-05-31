@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_allocate_grid.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 01:33:32 by margo             #+#    #+#             */
-/*   Updated: 2024/05/31 01:37:25 by margo            ###   ########.fr       */
+/*   Updated: 2024/05/31 18:59:20 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	**allocate_grid(int rows, int cols, size_t size)
+void	**ft_allocate_grid(int rows, int cols, size_t size)
 {
 	int		i;
 	int		j;

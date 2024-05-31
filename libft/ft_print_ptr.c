@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 16:46:18 by mganchev          #+#    #+#             */
-/*   Updated: 2024/04/23 18:21:24 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/05/31 19:03:55 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	rec_print(unsigned long n, const char *base)
 		return (1);
 	}
 	len = 0;
-	if (n > ft_strlen(base) - 1)
+	if (n > (unsigned long)ft_strlen(base) - 1)
 		len += rec_print(n / ft_strlen(base), base);
 	len += ft_putchar_fd(*(base + (n % ft_strlen(base))), 1);
 	return (len);

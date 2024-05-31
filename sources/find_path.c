@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_path.c                                       :+:      :+:    :+:   */
+/*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 20:19:30 by mganchev          #+#    #+#             */
-/*   Updated: 2024/05/31 02:02:39 by margo            ###   ########.fr       */
+/*   Updated: 2024/05/31 19:00:41 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// checks that a cell is valid
 bool	is_valid(char **grid, bool **visited, int row, int col)
 {
 	int	rows;
@@ -21,7 +22,7 @@ bool	is_valid(char **grid, bool **visited, int row, int col)
 	return ((row >= 0) && (row < rows) && (col >= 0) && (col < cols)
 		&& (grid[row][col] != WALL) && (!visited[row][col]));
 }
-
+// implements DFS algorithm + coin count
 void	depth_first_search(char **grid, bool **visited, t_point current,
 		int *coins)
 {
@@ -50,7 +51,7 @@ void	depth_first_search(char **grid, bool **visited, t_point current,
 		i++;
 	}
 }
-
+// initialises DFS algorithm
 bool	is_path(char **grid, t_point start, t_point end, int *coins)
 {
 	int		i;
@@ -60,13 +61,13 @@ bool	is_path(char **grid, t_point start, t_point end, int *coins)
 
 	i = 0;
 	grid_size(grid, &rows, &cols);
-	visited = ft_allocate_grid(rows, cols, sizeof(bool));
+	visited = (bool **)ft_allocate_grid(rows, cols, sizeof(bool));
 	depth_first_search(grid, visited, start, coins);
 	if (visited[end.x][end.y])
 		return (free_grid((char **)visited), true);
 	return (free_grid((char **)visited), false);
 }
-
+// locates START and EXIT and finds a path
 bool	find_path(char **grid)
 {
 	int		i;
@@ -94,14 +95,4 @@ bool	find_path(char **grid)
 		i++;
 	}
 	return (is_path(grid, start, end, &coins));
-}
-
-void	grid_size(char **grid, int *rows, int *cols)
-{
-	*rows = 0;
-	*cols = 0;
-	while (grid[*rows])
-		(*rows)++;
-	while (grid[0] && grid[0][*cols])
-		(*cols)++;
 }

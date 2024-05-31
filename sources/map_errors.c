@@ -6,12 +6,13 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 22:04:04 by mganchev          #+#    #+#             */
-/*   Updated: 2024/05/30 20:33:21 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:52:34 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// check that map is rectangular
 bool	check_line_len(char **grid)
 {
 	int	i;
@@ -31,7 +32,7 @@ bool	check_line_len(char **grid)
 	}
 	return (true);
 }
-
+// check for invalid map symbols
 bool	check_map_symbols(char **grid)
 {
 	int	i;
@@ -52,7 +53,7 @@ bool	check_map_symbols(char **grid)
 	}
 	return (true);
 }
-
+// check that there's one START, one EXIT and at least one COIN
 bool	check_repeat(char **grid)
 {
 	int	i;
@@ -79,7 +80,7 @@ bool	check_repeat(char **grid)
 	}
 	return (exit == 1 && start == 1 && coin >= 1);
 }
-
+// check that map edges are WALL
 bool	check_borders(char **grid)
 {
 	int	i;
@@ -108,8 +109,8 @@ bool	check_borders(char **grid)
 	}
 	return (true);
 }
-
-bool	check_path(char **grid)
+// check if symbols surrounded by WALL
+bool	check_if_boxed(char **grid)
 {
 	int	i;
 	int	j;
@@ -122,13 +123,10 @@ bool	check_path(char **grid)
 		{
 			if (grid[i][j] == START || grid[i][j] == EXIT || grid[i][j] == COIN)
 			{
-				if (j - 1 >= 0 && grid[i][j - 1] != WALL)
-					return (false);
-				if (j + 1 < ft_strlen(grid[i]) && grid[i][j + 1] != WALL)
-					return (false);
-				if (i - 1 >= 0 && grid[i - 1][j] != WALL)
-					return (false);
-				if (grid[i + 1] != NULL && grid[i + 1][j] != WALL)
+				if ((j - 1 >= 0 && grid[i][j - 1] == WALL) && (j
+						+ 1 < ft_strlen(grid[i]) && grid[i][j + 1] == WALL)
+					&& (i - 1 >= 0 && grid[i - 1][j] == WALL) && (grid[i
+						+ 1] != NULL && grid[i + 1][j] == WALL))
 					return (false);
 			}
 			j++;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: margo <margo@student.42.fr>                +#+  +:+       +#+         #
+#    By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/13 00:20:17 by mganchev          #+#    #+#              #
-#    Updated: 2024/05/31 01:38:10 by margo            ###   ########.fr        #
+#    Updated: 2024/05/31 18:49:17 by mganchev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ $(SRCDIR)/ft_strlcpy.c $(SRCDIR)/ft_strlen.c $(SRCDIR)/ft_strmapi.c $(SRCDIR)/ft
 $(SRCDIR)/ft_strnstr.c $(SRCDIR)/ft_strrchr.c $(SRCDIR)/ft_strtrim.c $(SRCDIR)/ft_substr.c \
 $(SRCDIR)/ft_tolower.c $(SRCDIR)/ft_toupper.c $(SRCDIR)/ft_nbrlen.c $(SRCDIR)/ft_power.c \
 $(SRCDIR)/ft_print_ptr.c $(SRCDIR)/ft_puthexnbr.c $(SRCDIR)/ft_putunbr_fd.c $(SRCDIR)/ft_swap.c \
-$(SRCDIR)/ft_swap_char.c $(SRCDIR)/ft_allocate_grid.c
+$(SRCDIR)/ft_swap_char.c $(SRCDIR)/ft_allocate_grid.c $(SRCDIR)/ft_grid_size.c
 
 BONUS_SRCS = $(SRCDIR)/ft_lstadd_back.c $(SRCDIR)/ft_lstadd_front.c $(SRCDIR)/ft_lstclear.c \
 $(SRCDIR)/ft_lstdelone.c $(SRCDIR)/ft_lstiter.c $(SRCDIR)/ft_lstlast.c \
