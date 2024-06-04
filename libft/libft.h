@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:00:24 by mganchev          #+#    #+#             */
-/*   Updated: 2024/05/31 18:59:35 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/04 18:15:58 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstadd_front(t_list **lst, t_list *new);
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
+void				ft_list_remove_if(t_list **begin_list, void *data_ref,
+						int (*cmp)());
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 size_t				ft_nbrlen(int n);
 size_t				ft_strlcat(char *dest, const char *src, size_t size);
