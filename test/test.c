@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_grid_size.c                                     :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/31 18:48:57 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/06 18:39:46 by mganchev         ###   ########.fr       */
+/*   Created: 2024/06/06 19:55:17 by mganchev          #+#    #+#             */
+/*   Updated: 2024/06/06 20:03:01 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_grid_size(char **grid, int *rows, int *cols)
+#include "so_long.h"
+
+int main(int argc, char *argv[])
 {
-	*rows = 0;
-	*cols = 0;
-	while (grid[*rows])
-		(*rows)++;
-	while (grid[0] && grid[0][*cols])
-		(*cols)++;
+    t_map   *map;
+    
+    if (argc == 2)
+    {
+        map = create_game_map(argv[1]);
+        if (!map)
+            return (1);
+        ft_print_grid(map->grid);
+    }
+    return (0);
 }

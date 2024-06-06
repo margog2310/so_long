@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_win.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:44:07 by mganchev          #+#    #+#             */
-/*   Updated: 2024/05/31 02:04:14 by margo            ###   ########.fr       */
+/*   Updated: 2024/06/06 19:04:23 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ t_game	*new_window(int w, int h, char *str)
 		return (close_window(game), NULL);
 	game->addr = mlx_get_data_addr(img->xpm, &game->bpp, &game->line_len,
 			&game->endian);
-	if (!load_sprites(game))
-		return (close_window(game), NULL);
 	return (game);
 }
 

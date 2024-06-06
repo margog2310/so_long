@@ -1,21 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_grid_size.c                                     :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/31 18:48:57 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/06 18:39:46 by mganchev         ###   ########.fr       */
+/*   Created: 2024/06/06 20:51:11 by mganchev          #+#    #+#             */
+/*   Updated: 2024/06/06 22:20:38 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_grid_size(char **grid, int *rows, int *cols)
+#include "libft.h"
+
+void	*ft_realloc(void *ptr, size_t size)
 {
-	*rows = 0;
-	*cols = 0;
-	while (grid[*rows])
-		(*rows)++;
-	while (grid[0] && grid[0][*cols])
-		(*cols)++;
+	void *new_ptr;
+
+	if (!ptr)
+	{
+		new_ptr = malloc(size);
+		if (!new_ptr)
+			return (NULL);
+		return (new_ptr);
+	}
+	if (!size)
+	{
+		free(ptr);
+		return (NULL);
+	}
+	new_ptr = malloc(size);
+	if (!new_ptr)
+		return (NULL);
+	ft_memcpy(new_ptr, ptr, size);
+	free(ptr);
+	return (new_ptr);
 }

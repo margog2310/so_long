@@ -10,6 +10,5 @@
 # Temp files
 *.swp
 .vscode
-test
 build
 .tgz
