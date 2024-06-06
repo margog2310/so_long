@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_list_remove_if.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/09 22:46:23 by mganchev          #+#    #+#             */
-/*   Updated: 2024/05/31 19:01:12 by mganchev         ###   ########.fr       */
+/*   Created: 2024/06/04 18:14:42 by mganchev          #+#    #+#             */
+/*   Updated: 2024/06/04 18:24:09 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
 {
-	int		i;
-	int		j;
-	size_t	len;
-	char	*str;
+	t_list	*temp;
 
-	i = 0;
-	j = 0;
-	len = ft_strlen(s1) + ft_strlen(s2);
-	str = malloc(len + 1);
-	if (!str)
-		return (NULL);
-	while (s1[i] != '\0')
+	if (*begin_list == NULL)
+		return ;
+	temp = *begin_list;
+	if (cmp(temp->content, data_ref) == 0)
 	{
-		str[i] = s1[i];
-		i++;
+		*begin_list = (*begin_list)->next;
+		free(temp->content);
+		free(temp);
+		ft_list_remove_if(begin_list, data_ref, cmp);
 	}
-	while (s2[j] != '\0')
-	{
-		str[i + j] = s2[j];
-		j++;
-	}
-	str[i + j] = '\0';
-	return (str);
+	else
+		ft_list_remove_if(&(*begin_list)->next, data_ref, cmp);
 }

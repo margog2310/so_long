@@ -6,7 +6,7 @@
 #    By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 20:24:28 by mganchev          #+#    #+#              #
-#    Updated: 2024/05/30 20:24:29 by mganchev         ###   ########.fr        #
+#    Updated: 2024/05/31 18:58:28 by mganchev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,12 +23,12 @@ SRCDIR =./sources
 OBJDIR =./build
 
 SRCS = $(SRCDIR)/main.c $(SRCDIR)/game_win.c $(SRCDIR)/mouse_events.c $(SRCDIR)/sprites.c \
-$(SRCDIR)/so_long_utils.c $(SRCDIR)/get_next_line.c $(SRCDIR)/get_next_line_utils.c \
-$(SRCDIR)/map_file.c $(SRCDIR)/map_errors.c
+$(SRCDIR)/so_long_utils.c $(SRCDIR)/get_next_line.c $(SRCDIR)/map_file.c $(SRCDIR)/map_errors.c \
+$(SRCDIR)/find_path.c
 
 OBJS = $(OBJDIR)/main.o $(OBJDIR)/game_win.o $(OBJDIR)/mouse_events.o $(OBJDIR)/sprites.o \
-$(OBJDIR)/so_long_utils.o $(OBJDIR)/get_next_line.o $(OBJDIR)/get_next_line_utils.o \
-$(OBJDIR)/map_file.o $(OBJDIR)/map_errors.o
+$(OBJDIR)/so_long_utils.o $(OBJDIR)/get_next_line.o $(OBJDIR)/map_file.o $(OBJDIR)/map_errors.o \
+$(OBJDIR)/find_path.o
 
 	
 all: $(OBJDIR) $(NAME)

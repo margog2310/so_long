@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/05/31 01:54:00 by margo            ###   ########.fr       */
+/*   Updated: 2024/05/31 18:52:55 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,14 +117,13 @@ bool		check_line_len(char **grid);
 bool		check_map_symbols(char **grid);
 bool		check_repeat(char **grid);
 bool		check_borders(char **grid);
-bool		check_path(char **grid);
+bool		check_if_boxed(char **grid);
 // path finding
 bool		is_valid(char **grid, bool **visited, int row, int col);
 void		depth_first_search(char **grid, bool **visited, t_point current,
 				int *coins);
 bool		is_path(char **grid, t_point start, t_point end, int *coins);
 bool		find_path(char **grid);
-void		grid_size(char **grid, int *rows, int *cols);
 // sprites
 t_img		*create_sprite(t_game *game, char *asset_path);
 t_img		*load_sprites(t_game *game);

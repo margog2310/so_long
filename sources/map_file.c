@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_file.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:50:01 by mganchev          #+#    #+#             */
-/*   Updated: 2024/05/31 01:59:57 by margo            ###   ########.fr       */
+/*   Updated: 2024/05/31 18:53:43 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ t_map	*read_file(int fd, t_map *map)
 	char	*line;
 	char	**grid;
 
+	grid = NULL;
 	line_count = 0;
-	line = get_next_lined(fd);
+	line = get_next_line(fd);
 	while (line)
 	{
 		grid[line_count] = line;
