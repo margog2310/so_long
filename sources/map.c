@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:27:15 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/07 20:21:14 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/07 22:14:16 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,13 @@ bool	check_map_errors(char **grid, int line_count)
 	if (!find_path(grid, line_count))
 		return (false);
 	return (true);
+}
+void	destroy_map(t_map *map)
+{
+	if (map)
+	{
+		if (map->grid)
+			free_grid(map->grid, map->y);
+		free(map);
+	}
 }

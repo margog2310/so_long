@@ -6,13 +6,14 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/07 20:21:41 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/07 20:43:44 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+# include "ft_printf.h"
 # include "get_next_line.h"
 # include "libft.h"
 # include "mlx.h"
@@ -120,6 +121,7 @@ bool		check_repeat(char **grid, int line_count);
 bool		check_borders(char **grid, int line_count);
 bool		check_if_boxed(char **grid, int line_count);
 bool		check_map_errors(char **grid, int line_count);
+void		destroy_map(t_map *map);
 // path finding
 bool		is_valid(char **grid, bool **visited, int row, int col,
 				int line_count);
