@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:50:01 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/06 19:39:43 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/07 20:20:43 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,29 @@ t_map	*read_file(int fd, t_map *map)
 	line = get_next_line(fd);
 	while (line)
 	{
+		grid = ft_realloc((void *)grid, sizeof(char *) * (line_count + 1));
+		if (!grid)
+			return (NULL);
 		grid[line_count] = line;
 		line_count++;
+		line = get_next_line(fd);
 	}
-	if (check_line_len(grid) != 1)
-		return (free_grid(grid), NULL);
+	if (check_map_errors(grid, line_count) != true)
+		return (free_grid(grid, line_count), NULL);
 	map->grid = grid;
-	map->x = ft_strlen(line);
-	map->y = line_count;
-	ft_grid_size(map->grid, &map->rows, &map->cols);
+	map->cols = ft_strlen(grid[0]);
+	map->rows = line_count;
+	map->x = 0;
+	map->y = 0;
 	return (map);
 }
 
-void	free_grid(char **grid)
+void	free_grid(char **grid, int line_count)
 {
 	int	i;
 
 	i = 0;
-	while (grid[i] != NULL)
+	while (i < line_count)
 	{
 		free(grid[i]);
 		i++;

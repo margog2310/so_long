@@ -6,14 +6,14 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 22:04:04 by mganchev          #+#    #+#             */
-/*   Updated: 2024/05/31 18:52:34 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/07 20:20:08 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 // check that map is rectangular
-bool	check_line_len(char **grid)
+bool	check_line_len(char **grid, int line_count)
 {
 	int	i;
 	int	line_len;
@@ -22,27 +22,32 @@ bool	check_line_len(char **grid)
 	if (grid == NULL)
 		return (false);
 	i = 0;
-	while (grid != NULL)
+	while (i < line_count)
 	{
 		line_len = ft_strlen(grid[i]);
 		next_line_len = ft_strlen(grid[i + 1]);
 		if (!(line_len == next_line_len))
-			return (false);
+		{
+			if (i + 2 <= line_count)
+				break ;
+			else
+				return (false);
+		}
 		i++;
 	}
 	return (true);
 }
 // check for invalid map symbols
-bool	check_map_symbols(char **grid)
+bool	check_map_symbols(char **grid, int line_count)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (grid[i] != NULL)
+	while (i < line_count)
 	{
 		j = 0;
-		while (grid[i][j] != '\0')
+		while (grid[i][j] != '\n' && grid[i][j] != '\0')
 		{
 			if (grid[i][j] != SPACE && grid[i][j] != WALL && grid[i][j] != COIN
 				&& grid[i][j] != EXIT && grid[i][j] != START)
@@ -54,7 +59,7 @@ bool	check_map_symbols(char **grid)
 	return (true);
 }
 // check that there's one START, one EXIT and at least one COIN
-bool	check_repeat(char **grid)
+bool	check_repeat(char **grid, int line_count)
 {
 	int	i;
 	int	j;
@@ -66,10 +71,10 @@ bool	check_repeat(char **grid)
 	exit = 0;
 	start = 0;
 	coin = 0;
-	while (grid[i] != NULL)
+	while (i < line_count)
 	{
 		j = 0;
-		while (grid[i][j] != '\0')
+		while (grid[i][j] != '\n' && grid[i][j] != '\0')
 		{
 			exit += grid[i][j] == EXIT;
 			start += grid[i][j] == START;
@@ -81,45 +86,45 @@ bool	check_repeat(char **grid)
 	return (exit == 1 && start == 1 && coin >= 1);
 }
 // check that map edges are WALL
-bool	check_borders(char **grid)
+bool	check_borders(char **grid, int line_count)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (grid[0][i] != '\0')
+	while (grid[0][i] != '\0' && grid[0][i] != '\n')
 	{
 		if (grid[0][i] != WALL)
 			return (false);
 		i++;
 	}
 	i = 1;
-	while (grid[i] != NULL)
+	while (i < line_count)
 	{
-		if (grid[i][0] != WALL || grid[i][ft_strlen(grid[i]) - 1] != WALL)
+		if (grid[i][0] != WALL && grid[i][ft_strlen(grid[i]) - 1] != WALL)
 			return (false);
 		i++;
 	}
 	j = 0;
-	while (grid[--i][j] != '\0')
+	while (grid[i - 1][j] != '\0' && grid[i - 1][j] != '\n')
 	{
-		if (grid[i][j] != WALL)
+		if (grid[i - 1][j] != WALL)
 			return (false);
 		j++;
 	}
 	return (true);
 }
 // check if symbols surrounded by WALL
-bool	check_if_boxed(char **grid)
+bool	check_if_boxed(char **grid, int line_count)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (grid[i] != NULL)
+	while (i < line_count)
 	{
 		j = 0;
-		while (grid[i][j] != '\0')
+		while (grid[i][j] != '\0' && grid[i][j] != '\n')
 		{
 			if (grid[i][j] == START || grid[i][j] == EXIT || grid[i][j] == COIN)
 			{

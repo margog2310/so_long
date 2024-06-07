@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/06 19:35:44 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/07 20:21:41 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,19 +113,21 @@ t_map		*read_file(int fd, t_map *map);
 t_map		*create_game_map(char *file_path);
 int			free_file(char *buffer);
 int			close_file(int fd);
-void		free_grid(char **grid);
-bool		check_line_len(char **grid);
-bool		check_map_symbols(char **grid);
-bool		check_repeat(char **grid);
-bool		check_borders(char **grid);
-bool		check_if_boxed(char **grid);
-bool		check_map_errors(char **grid);
+void		free_grid(char **grid, int line_count);
+bool		check_line_len(char **grid, int line_count);
+bool		check_map_symbols(char **grid, int line_count);
+bool		check_repeat(char **grid, int line_count);
+bool		check_borders(char **grid, int line_count);
+bool		check_if_boxed(char **grid, int line_count);
+bool		check_map_errors(char **grid, int line_count);
 // path finding
-bool		is_valid(char **grid, bool **visited, int row, int col);
+bool		is_valid(char **grid, bool **visited, int row, int col,
+				int line_count);
 void		depth_first_search(char **grid, bool **visited, t_point current,
-				int *coins);
-bool		is_path(char **grid, t_point start, t_point end, int *coins);
-bool		find_path(char **grid);
+				int *coins, int line_count);
+bool		is_path(char **grid, t_point start, t_point end, int *coins,
+				int line_count);
+bool		find_path(char **grid, int line_count);
 // sprites
 t_img		*create_sprite(t_game *game, char *asset_path);
 t_img		*load_sprites(t_game *game);

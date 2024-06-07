@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:00:24 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/06 21:32:36 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/07 20:17:23 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void				ft_swap(int *a, int *b);
 void				ft_swap_char(char *a, char *b);
 void				ft_bzero(void *s, size_t n);
 void				ft_putendl_fd(char *s, int fd);
-void				ft_print_grid(char **grid);
+void				ft_print_grid(char **grid, int rows, int cols);
 void				ft_grid_size(char **grid, int *rows, int *cols);
 void				**ft_allocate_grid(int rows, int cols, size_t size);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
