@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
+/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/06 23:25:40 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/07 01:30:31 by margo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ bool		is_valid(char **grid, bool **visited, int row, int col);
 void		depth_first_search(char **grid, bool **visited, t_point current,
 				int *coins);
 bool		is_path(char **grid, t_point start, t_point end, int *coins);
-bool		find_path(char **grid);
+bool		find_path(char **grid, int line_count);
 // sprites
 t_img		*create_sprite(t_game *game, char *asset_path);
 t_img		*load_sprites(t_game *game);

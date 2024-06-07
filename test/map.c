@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
+/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:27:15 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/06 23:09:51 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/07 01:45:44 by margo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ bool	check_map_errors(char **grid, int line_count)
 	if (!check_borders(grid, line_count))
 		return (false);
 	if (!check_if_boxed(grid, line_count))
+		return (false);
+	if (!find_path(grid, line_count))
 		return (false);
 	return (true);
 }

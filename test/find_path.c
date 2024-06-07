@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
+/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 20:19:30 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/06 19:40:41 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/07 01:29:39 by margo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,19 @@ void	depth_first_search(char **grid, bool **visited, t_point current,
 // initialises DFS algorithm
 bool	is_path(char **grid, t_point start, t_point end, int *coins)
 {
-	int		i;
 	int		rows;
 	int		cols;
 	bool	**visited;
 
-	i = 0;
 	ft_grid_size(grid, &rows, &cols);
 	visited = (bool **)ft_allocate_grid(rows, cols, sizeof(bool));
 	depth_first_search(grid, visited, start, coins);
 	if (visited[end.x][end.y])
-		return (free_grid((char **)visited), true);
-	return (free_grid((char **)visited), false);
+		return (free_grid((char **)visited, rows), true);
+	return (free_grid((char **)visited, rows), false);
 }
 // locates START and EXIT and finds a path
-bool	find_path(char **grid)
+bool	find_path(char **grid, int line_count)
 {
 	int		i;
 	int		coins;
@@ -78,7 +76,7 @@ bool	find_path(char **grid)
 
 	i = 0;
 	coins = 0;
-	while (grid[i] != NULL)
+	while (i < line_count)
 	{
 		symbol = ft_strchr(grid[i], START);
 		if (symbol)
