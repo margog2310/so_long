@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
+/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/07 20:43:44 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/08 17:54:40 by margo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_map
 	int		y;
 	int		rows;
 	int		cols;
+	t_list	*textures;
 }			t_map;
 
 typedef struct s_game
@@ -100,7 +101,7 @@ typedef struct s_game
 
 // window
 t_img		*new_image(t_game *game);
-t_game		*new_window(int w, int h, char *str);
+t_game		*new_window(int w, int h, char *str, char *map_path);
 void		draw_bgn(t_bgn bgn, t_game *game);
 void		*free_images(t_img *img);
 int			close_window(t_game *game);
@@ -122,6 +123,10 @@ bool		check_borders(char **grid, int line_count);
 bool		check_if_boxed(char **grid, int line_count);
 bool		check_map_errors(char **grid, int line_count);
 void		destroy_map(t_map *map);
+// texturesvoid
+t_img		*create_texture(t_game *game, char *asset_path, int x, int y);
+void		load_textures(t_game *game);
+void		*destroy_texture(t_img *texture);
 // path finding
 bool		is_valid(char **grid, bool **visited, int row, int col,
 				int line_count);
@@ -140,5 +145,7 @@ int			get_opacity(int trgb);
 int			get_r(int trgb);
 int			get_g(int trgb);
 int			get_b(int trgb);
+// misc
+char		get_char(char **grid, int line_count, int x, int y);
 
 #endif

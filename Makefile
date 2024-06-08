@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+         #
+#    By: margo <margo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 20:24:28 by mganchev          #+#    #+#              #
-#    Updated: 2024/06/07 22:19:29 by mganchev         ###   ########.fr        #
+#    Updated: 2024/06/08 18:08:52 by margo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ ${NAME}: $(OBJS)
 	@make -C $(LIBFT)
 	@make -C $(LIBFT) bonus
 	@make -C $(MLX)
-	$(CC) $(CFLAGS) -L$(MLX) -L$(LIBFT) $(OBJS) -lXext -lX11 -lm -lmlx -lft -o $(NAME)
+	$(CC) $(CFLAGS) -L$(MLX) -L$(LIBFT) $(OBJS) -lmlx -lXext -lX11 -lm -lft -o $(NAME)
 
 clean:
 	@make clean -C $(MLX)

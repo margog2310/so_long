@@ -6,7 +6,7 @@
 /*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:35:26 by mganchev          #+#    #+#             */
-/*   Updated: 2024/05/31 02:05:56 by margo            ###   ########.fr       */
+/*   Updated: 2024/06/08 13:34:17 by margo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ t_img	*create_sprite(t_game *game, char *asset_path)
 
 	sprite = malloc(sizeof(t_img));
 	if (!sprite)
-		close_window(game);
+		return (close_window(game), NULL);
 	sprite->xpm = mlx_xpm_file_to_image(game->mlx, asset_path, &sprite->w,
 			&sprite->h);
 	sprite->mlx = game->mlx;
 	if (!sprite->xpm)
-		close_window(game);
+		return (close_window(game), NULL);
 	ft_lstadd_back(&game->sprites, ft_lstnew(sprite));
 	mlx_put_image_to_window(game->mlx, game->win, sprite->xpm, 150, 150);
 	return (sprite);

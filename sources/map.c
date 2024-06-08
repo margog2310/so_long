@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
+/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:27:15 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/07 22:14:16 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/08 18:10:29 by margo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,43 @@ t_map	*create_game_map(char *file_path)
 	close_file(fd);
 	return (map);
 }
-
-//  checks all possible map errors
-bool	check_map_errors(char **grid, int line_count)
+// generates a texture
+t_img	*create_texture(t_game *game, char *asset_path, int x, int y)
 {
-	if (!check_line_len(grid, line_count))
-		return (false);
-	if (!check_map_symbols(grid, line_count))
-		return (false);
-	if (!check_repeat(grid, line_count))
-		return (false);
-	if (!check_borders(grid, line_count))
-		return (false);
-	if (!check_if_boxed(grid, line_count))
-		return (false);
-	if (!find_path(grid, line_count))
-		return (false);
-	return (true);
+	t_img		*texture;
+
+	texture = malloc(sizeof(t_img));
+	if (!texture)
+		return (NULL);
+	texture->xpm = mlx_xpm_file_to_image(game->mlx, asset_path, &texture->w,
+			&texture->h);
+	texture->mlx = game->mlx;
+	if (!texture->xpm)
+		return (close_window(game), NULL);
+	ft_lstadd_back(&game->map->textures, ft_lstnew(texture));
+	mlx_put_image_to_window(game->mlx, game->win, texture->xpm, x, y);
+	return (texture);
 }
+// load all textures
+void	load_textures(t_game *game)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < game->map->rows)
+	{
+		j = 0;
+		while (game->map->grid[i][j] != '\0' && game->map->grid[i][j] != '\n')
+		{
+			if (get_char(game->map->grid, game->map->rows, i * 32, j * 32) == COIN)
+				create_texture(game, COLLECTIBLE, i, j);
+			j++;
+		}
+		i++;
+	}
+}
+//  checks all possible map errors
 void	destroy_map(t_map *map)
 {
 	if (map)
@@ -53,4 +72,13 @@ void	destroy_map(t_map *map)
 			free_grid(map->grid, map->y);
 		free(map);
 	}
+}
+// destroy a texture
+void	*destroy_texture(t_img *texture)
+{
+	if (texture->xpm)
+		mlx_destroy_image(texture->mlx, texture->xpm);
+	free(texture);
+	texture = NULL;
+	return (NULL);
 }

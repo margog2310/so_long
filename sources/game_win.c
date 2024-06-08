@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_win.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
+/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:44:07 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/07 22:07:33 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/08 17:52:23 by margo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_img	*new_image(t_game *game)
 	return (img);
 }
 
-t_game	*new_window(int w, int h, char *str)
+t_game	*new_window(int w, int h, char *str, char *map_path)
 {
 	t_game	*game;
 	t_img	*img;
@@ -50,6 +50,9 @@ t_game	*new_window(int w, int h, char *str)
 		return (close_window(game), NULL);
 	game->addr = mlx_get_data_addr(img->xpm, &game->bpp, &game->line_len,
 			&game->endian);
+	game->map = create_game_map(map_path);
+		if (!game->map)
+			return (close_window(game), NULL);
 	return (game);
 }
 
@@ -89,7 +92,7 @@ void	*free_images(t_img *img)
 int	close_window(t_game *game)
 {
 	if (game)
-	{
+	{	
 		if (game->sprites)
 			ft_lstclear(&game->sprites, (void *)destroy_sprite);
 		if (game->img)
@@ -102,7 +105,11 @@ int	close_window(t_game *game)
 			free(game->mlx);
 		}
 		if (game->map)
+		{
 			destroy_map(game->map);
+			if (game->map->textures)
+				ft_lstclear(&game->map->textures, (void *)destroy_texture);
+		}
 		free(game);
 	}
 	exit(EXIT_SUCCESS);

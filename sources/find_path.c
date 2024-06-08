@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
+/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 20:19:30 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/07 20:19:35 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/08 17:47:38 by margo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,20 @@ bool	find_path(char **grid, int line_count)
 		i++;
 	}
 	return (is_path(grid, start, end, &coins, line_count));
+}
+bool	check_map_errors(char **grid, int line_count)
+{
+	if (!check_line_len(grid, line_count))
+		return (false);
+	if (!check_map_symbols(grid, line_count))
+		return (false);
+	if (!check_repeat(grid, line_count))
+		return (false);
+	if (!check_borders(grid, line_count))
+		return (false);
+	if (!check_if_boxed(grid, line_count))
+		return (false);
+	if (!find_path(grid, line_count))
+		return (false);
+	return (true);
 }

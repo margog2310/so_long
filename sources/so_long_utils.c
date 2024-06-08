@@ -6,7 +6,7 @@
 /*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:18:32 by mganchev          #+#    #+#             */
-/*   Updated: 2024/05/31 01:55:39 by margo            ###   ########.fr       */
+/*   Updated: 2024/06/08 18:01:23 by margo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,10 @@ void	put_pixel_img(t_game *game_img, int x, int y, int colour)
 					/ 8));
 		*(unsigned int *)dst = colour;
 	}
+}
+char	get_char(char **grid, int line_count, int x, int y)
+{
+	if (x < 0 || y < 0 || y >= line_count || x >= ft_strlen(grid[y]))
+		return ('\0');
+	return (grid[y][x]);
 }
