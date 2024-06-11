@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:27:15 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/11 22:53:53 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/11 23:29:28 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_map	*create_game_map(char *file_path)
 	close_file(fd);
 	return (map);
 }
+
 // generates a texture
 t_img	*create_texture(t_game *game, char *asset_path, int x, int y)
 {
@@ -46,6 +47,7 @@ t_img	*create_texture(t_game *game, char *asset_path, int x, int y)
 	mlx_put_image_to_window(game->mlx, game->win, texture->xpm, x, y);
 	return (texture);
 }
+
 // load all textures
 void	load_textures(t_game *game)
 {
@@ -69,6 +71,7 @@ void	load_textures(t_game *game)
 		i++;
 	}
 }
+
 //  checks all possible map errors
 void	destroy_map(t_map *map)
 {
@@ -81,6 +84,7 @@ void	destroy_map(t_map *map)
 		free(map);
 	}
 }
+
 // destroy a texture
 void	*destroy_texture(t_img *texture)
 {

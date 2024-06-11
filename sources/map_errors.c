@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 22:04:04 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/07 20:20:08 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/11 23:23:59 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ bool	check_line_len(char **grid, int line_count)
 	}
 	return (true);
 }
+
 // check for invalid map symbols
 bool	check_map_symbols(char **grid, int line_count)
 {
@@ -58,6 +59,7 @@ bool	check_map_symbols(char **grid, int line_count)
 	}
 	return (true);
 }
+
 // check that there's one START, one EXIT and at least one COIN
 bool	check_repeat(char **grid, int line_count)
 {
@@ -85,6 +87,7 @@ bool	check_repeat(char **grid, int line_count)
 	}
 	return (exit == 1 && start == 1 && coin >= 1);
 }
+
 // check that map edges are WALL
 bool	check_borders(char **grid, int line_count)
 {
@@ -114,6 +117,7 @@ bool	check_borders(char **grid, int line_count)
 	}
 	return (true);
 }
+
 // check if symbols surrounded by WALL
 bool	check_if_boxed(char **grid, int line_count)
 {

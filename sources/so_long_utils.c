@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:18:32 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/11 22:03:06 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/11 23:29:45 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,17 @@ void	put_pixel_img(t_game *game_img, int x, int y, int colour)
 		*(unsigned int *)dst = colour;
 	}
 }
+
 char	get_char(char **grid, int line_count, int x, int y)
 {
 	if (x < 0 || y < 0 || y >= line_count || x >= ft_strlen(grid[y]))
 		return ('\0');
 	return (grid[y][x]);
 }
+
 void	*ft_realloc_sl(void *ptr, size_t old_size, size_t new_size)
 {
-	void *new_ptr;
+	void	*new_ptr;
 
 	if (!ptr)
 	{

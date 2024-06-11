@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 20:19:30 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/08 17:47:38 by margo            ###   ########.fr       */
+/*   Updated: 2024/06/11 23:26:13 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ bool	is_valid(char **grid, bool **visited, int row, int col, int line_count)
 	return ((row >= 0) && (row < rows) && (col >= 0) && (col < cols)
 		&& (grid[row][col] != WALL) && (!visited[row][col]));
 }
+
 // implements DFS algorithm + coin count
 void	depth_first_search(char **grid, bool **visited, t_point current,
 		int *coins, int line_count)
@@ -52,6 +53,7 @@ void	depth_first_search(char **grid, bool **visited, t_point current,
 		i++;
 	}
 }
+
 // initialises DFS algorithm
 bool	is_path(char **grid, t_point start, t_point end, int *coins,
 		int line_count)
@@ -68,6 +70,7 @@ bool	is_path(char **grid, t_point start, t_point end, int *coins,
 		return (free_grid((char **)visited, rows), true);
 	return (free_grid((char **)visited, rows), false);
 }
+
 // locates START and EXIT and finds a path
 bool	find_path(char **grid, int line_count)
 {
@@ -97,6 +100,8 @@ bool	find_path(char **grid, int line_count)
 	}
 	return (is_path(grid, start, end, &coins, line_count));
 }
+
+// check all map errors
 bool	check_map_errors(char **grid, int line_count)
 {
 	if (!check_line_len(grid, line_count))

@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:50:01 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/11 22:51:01 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/11 23:24:18 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ t_map	*read_file(int fd, t_map *map)
 	line = get_next_line(fd);
 	while (line)
 	{
-		map->grid = ft_realloc_sl((void *)map->grid, sizeof(char *) * line_count, sizeof(char *) * (line_count + 1));
+		map->grid = ft_realloc_sl((void *)map->grid, sizeof(char *)
+				* line_count, sizeof(char *) * (line_count + 1));
 		if (!map->grid)
 			return (NULL);
 		map->grid[line_count] = line;
