@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_win.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:44:07 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/08 17:52:23 by margo            ###   ########.fr       */
+/*   Updated: 2024/06/11 21:37:48 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_img	*new_image(t_game *game)
 	return (img);
 }
 
-t_game	*new_window(int w, int h, char *str, char *map_path)
+t_game	*new_window(int w, int h, char *str)
 {
 	t_game	*game;
 	t_img	*img;
@@ -50,9 +50,6 @@ t_game	*new_window(int w, int h, char *str, char *map_path)
 		return (close_window(game), NULL);
 	game->addr = mlx_get_data_addr(img->xpm, &game->bpp, &game->line_len,
 			&game->endian);
-	game->map = create_game_map(map_path);
-		if (!game->map)
-			return (close_window(game), NULL);
 	return (game);
 }
 
@@ -72,7 +69,7 @@ void	draw_bgn(t_bgn bgn, t_game *game)
 		j = 0;
 		while (j < game->w)
 		{
-			put_pixel_img(game, j, i, bgn.colour);
+			put_pixel_img(game, j * TILE_SIZE, i * TILE_SIZE, bgn.colour);
 			j++;
 		}
 		i++;
@@ -95,6 +92,8 @@ int	close_window(t_game *game)
 	{	
 		if (game->sprites)
 			ft_lstclear(&game->sprites, (void *)destroy_sprite);
+		if (game->map)
+			destroy_map(game->map);
 		if (game->img)
 			ft_lstclear(&game->img, (void *)free_images);
 		if (game->win)
@@ -104,16 +103,9 @@ int	close_window(t_game *game)
 			mlx_destroy_display(game->mlx);
 			free(game->mlx);
 		}
-		if (game->map)
-		{
-			destroy_map(game->map);
-			if (game->map->textures)
-				ft_lstclear(&game->map->textures, (void *)destroy_texture);
-		}
 		free(game);
 	}
 	exit(EXIT_SUCCESS);
-	return (0);
 }
 
 /*my_mlx_pixel_put(&img, 1280, 900, 0x00FF0000); //buffer pixels to img

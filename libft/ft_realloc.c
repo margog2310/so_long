@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 20:51:11 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/06 22:20:38 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/11 21:44:43 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void	*ft_realloc(void *ptr, size_t size)
 	}
 	new_ptr = malloc(size);
 	if (!new_ptr)
+	{
+		free(ptr);
 		return (NULL);
+	}
 	ft_memcpy(new_ptr, ptr, size);
 	free(ptr);
 	return (new_ptr);

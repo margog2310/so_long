@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:18:32 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/08 18:01:23 by margo            ###   ########.fr       */
+/*   Updated: 2024/06/11 22:03:06 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,27 @@ char	get_char(char **grid, int line_count, int x, int y)
 	if (x < 0 || y < 0 || y >= line_count || x >= ft_strlen(grid[y]))
 		return ('\0');
 	return (grid[y][x]);
+}
+void	*ft_realloc_sl(void *ptr, size_t old_size, size_t new_size)
+{
+	void *new_ptr;
+
+	if (!ptr)
+	{
+		new_ptr = malloc(new_size);
+		if (!new_ptr)
+			return (NULL);
+		return (new_ptr);
+	}
+	if (!new_size)
+		return (free(ptr), NULL);
+	new_ptr = malloc(new_size);
+	if (!new_ptr)
+		return (free(ptr), NULL);
+	if (old_size < new_size)
+		ft_memcpy(new_ptr, ptr, old_size);
+	else
+		ft_memcpy(new_ptr, ptr, new_size);
+	free(ptr);
+	return (new_ptr);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:05:05 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/08 18:19:53 by margo            ###   ########.fr       */
+/*   Updated: 2024/06/11 22:55:00 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,25 @@
 int	main(int argc, char *argv[])
 {
 	t_game	*game;
+	t_map	*map;
 
 	if (argc == 2)
 	{
 		// read the map before you create the window so you can use the dimensions to draw the window
-		game = new_window(1280, 900, "Game", argv[1]);
+		map = create_game_map(argv[1]);
+		if (!map)
+			return (destroy_map(map), -1);
+		game = new_window(map->cols * TILE_SIZE, map->rows * TILE_SIZE, "Game");
 		if (!game || !game->mlx || !game->win)
-			return (close_window(game), 1);
+			return (destroy_map(map), close_window(game), 1);
+		game->map = map;
 		draw_bgn((t_bgn){1280, 900, 1152000, 0x000000}, game);
-		load_sprites(game);
 		load_textures(game);
 		mlx_mouse_hook(game->win, &mouse_event, 0);
 		mlx_hook(game->win, KeyRelease, KeyReleaseMask, &on_keypress, game);
-		mlx_hook(game->win, DestroyNotify, NoEventMask, close_window, game);
+		mlx_hook(game->win, DestroyNotify, NoEventMask, &close_window, game);
 		mlx_loop(game->mlx);
+		destroy_map(map);
 		close_window(game);
 	}
 	else

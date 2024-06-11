@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:27:15 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/08 18:10:29 by margo            ###   ########.fr       */
+/*   Updated: 2024/06/11 22:53:53 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@ t_map	*create_game_map(char *file_path)
 	t_map	*map;
 
 	fd = open_file(file_path);
+	if (fd < 0)
+		return (ft_printf("Error\n"), NULL);
 	map = malloc(sizeof(t_map));
 	if (!map)
 		return (NULL);
 	map = read_file(fd, map);
 	if (!map)
-		return (free(map), NULL);
+		return (NULL);
 	close_file(fd);
 	return (map);
 }
@@ -39,7 +41,7 @@ t_img	*create_texture(t_game *game, char *asset_path, int x, int y)
 			&texture->h);
 	texture->mlx = game->mlx;
 	if (!texture->xpm)
-		return (close_window(game), NULL);
+		return (free(texture), close_window(game), NULL);
 	ft_lstadd_back(&game->map->textures, ft_lstnew(texture));
 	mlx_put_image_to_window(game->mlx, game->win, texture->xpm, x, y);
 	return (texture);
@@ -56,8 +58,12 @@ void	load_textures(t_game *game)
 		j = 0;
 		while (game->map->grid[i][j] != '\0' && game->map->grid[i][j] != '\n')
 		{
-			if (get_char(game->map->grid, game->map->rows, i * 32, j * 32) == COIN)
-				create_texture(game, COLLECTIBLE, i, j);
+			if (get_char(game->map->grid, game->map->rows, j, i) == COIN)
+				create_texture(game, COLLECTIBLE, j * TILE_SIZE, i * TILE_SIZE);
+			if (get_char(game->map->grid, game->map->rows, j, i) == WALL)
+				create_texture(game, PLATFORM, j * TILE_SIZE, i * TILE_SIZE);
+			if (get_char(game->map->grid, game->map->rows, j, i) == START)
+				create_sprite(game, MARIO, j * TILE_SIZE, i * TILE_SIZE);
 			j++;
 		}
 		i++;
@@ -69,7 +75,9 @@ void	destroy_map(t_map *map)
 	if (map)
 	{
 		if (map->grid)
-			free_grid(map->grid, map->y);
+			free_grid(map->grid, map->rows);
+		if (map->textures)
+			ft_lstclear(&map->textures, (void *)destroy_texture);
 		free(map);
 	}
 }

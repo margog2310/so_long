@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:50:01 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/07 20:20:43 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/11 22:51:01 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	open_file(char *path)
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		return (0);
+		return (-1);
 	return (fd);
 }
 
@@ -26,24 +26,23 @@ t_map	*read_file(int fd, t_map *map)
 {
 	int		line_count;
 	char	*line;
-	char	**grid;
 
-	grid = NULL;
+	map->grid = NULL;
 	line_count = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
-		grid = ft_realloc((void *)grid, sizeof(char *) * (line_count + 1));
-		if (!grid)
+		map->grid = ft_realloc_sl((void *)map->grid, sizeof(char *) * line_count, sizeof(char *) * (line_count + 1));
+		if (!map->grid)
 			return (NULL);
-		grid[line_count] = line;
+		map->grid[line_count] = line;
 		line_count++;
 		line = get_next_line(fd);
 	}
-	if (check_map_errors(grid, line_count) != true)
-		return (free_grid(grid, line_count), NULL);
-	map->grid = grid;
-	map->cols = ft_strlen(grid[0]);
+	if (check_map_errors(map->grid, line_count) != true)
+		return (destroy_map(map), ft_printf("Error\n"), NULL);
+	map->textures = NULL;
+	map->cols = ft_strlen(map->grid[0]) - 1;
 	map->rows = line_count;
 	map->x = 0;
 	map->y = 0;

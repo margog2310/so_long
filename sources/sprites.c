@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:35:26 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/08 13:34:17 by margo            ###   ########.fr       */
+/*   Updated: 2024/06/11 22:48:18 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_img	*create_sprite(t_game *game, char *asset_path)
+t_img	*create_sprite(t_game *game, char *asset_path, int x, int y)
 {
 	t_img	*sprite;
 
@@ -25,18 +25,8 @@ t_img	*create_sprite(t_game *game, char *asset_path)
 	if (!sprite->xpm)
 		return (close_window(game), NULL);
 	ft_lstadd_back(&game->sprites, ft_lstnew(sprite));
-	mlx_put_image_to_window(game->mlx, game->win, sprite->xpm, 150, 150);
+	mlx_put_image_to_window(game->mlx, game->win, sprite->xpm, x, y);
 	return (sprite);
-}
-
-t_img	*load_sprites(t_game *game)
-{
-	t_img	*mario_sprite;
-
-	mario_sprite = create_sprite(game, MARIO);
-	if (!mario_sprite)
-		return (close_window(game), NULL);
-	return (mario_sprite);
 }
 
 void	*destroy_sprite(t_img *sprite)

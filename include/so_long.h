@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/08 17:54:40 by margo            ###   ########.fr       */
+/*   Updated: 2024/06/11 22:39:18 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-# define TILE_W 32
-# define TILE_H 32
+# define TILE_SIZE 32
 
 # define W 119
 # define A 97
@@ -101,7 +100,7 @@ typedef struct s_game
 
 // window
 t_img		*new_image(t_game *game);
-t_game		*new_window(int w, int h, char *str, char *map_path);
+t_game		*new_window(int w, int h, char *str);
 void		draw_bgn(t_bgn bgn, t_game *game);
 void		*free_images(t_img *img);
 int			close_window(t_game *game);
@@ -136,8 +135,8 @@ bool		is_path(char **grid, t_point start, t_point end, int *coins,
 				int line_count);
 bool		find_path(char **grid, int line_count);
 // sprites
-t_img		*create_sprite(t_game *game, char *asset_path);
-t_img		*load_sprites(t_game *game);
+t_img		*create_sprite(t_game *game, char *asset_path, int x, int y);
+void		load_sprites(t_game *game);
 void		*destroy_sprite(t_img *sprite);
 // colours
 int			gen_trgb(int opacity, int red, int green, int blue);
@@ -147,5 +146,6 @@ int			get_g(int trgb);
 int			get_b(int trgb);
 // misc
 char		get_char(char **grid, int line_count, int x, int y);
+void	*ft_realloc_sl(void *ptr, size_t old_size, size_t new_size);
 
 #endif
