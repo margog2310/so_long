@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:05:05 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/11 22:55:00 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/11 23:20:56 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	main(int argc, char *argv[])
 
 	if (argc == 2)
 	{
-		// read the map before you create the window so you can use the dimensions to draw the window
 		map = create_game_map(argv[1]);
 		if (!map)
 			return (destroy_map(map), -1);
@@ -41,8 +40,8 @@ int	main(int argc, char *argv[])
 	return (0);
 }
 /* order of operations:
-	1. open map.ber, read it and create the game map based on it
-	2. use the dimensions of the game map to create the game struct and a the window
+	+ 1. open map.ber, read it and create the game map based on it
+	+ 2. use the dimensions of the game map to create the game struct and a the window
 	3. draw the background and then load all textures based on the map
 	4. load the sprites, begin animations and start the coin counter
 	5. initialise the game loop and hooks
