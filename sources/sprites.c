@@ -6,34 +6,27 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:35:26 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/11 22:48:18 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/12 23:25:05 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_img	*create_sprite(t_game *game, char *asset_path, int x, int y)
+t_sprite	*create_sprite(t_game *game, char *asset_path, int x, int y)
 {
-	t_img	*sprite;
+	t_sprite	*sprite;
 
-	sprite = malloc(sizeof(t_img));
+	sprite = malloc(sizeof(t_sprite));
 	if (!sprite)
-		return (close_window(game), NULL);
-	sprite->xpm = mlx_xpm_file_to_image(game->mlx, asset_path, &sprite->w,
-			&sprite->h);
-	sprite->mlx = game->mlx;
-	if (!sprite->xpm)
-		return (close_window(game), NULL);
+		return (NULL);
+	sprite->texture = create_texture(game, asset_path, x, y);
+	sprite->position.x = x;
+	sprite->position.y = y;
 	ft_lstadd_back(&game->sprites, ft_lstnew(sprite));
-	mlx_put_image_to_window(game->mlx, game->win, sprite->xpm, x, y);
 	return (sprite);
 }
 
-void	*destroy_sprite(t_img *sprite)
+int	player_jump(int	keysym, t_game *game)
 {
-	if (sprite->xpm)
-		mlx_destroy_image(sprite->mlx, sprite->xpm);
-	free(sprite);
-	sprite = NULL;
-	return (NULL);
+	// do movement up (jump) + 3 more for other directions
 }

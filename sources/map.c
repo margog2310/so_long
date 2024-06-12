@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:27:15 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/11 23:29:28 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/12 22:34:33 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,5 @@ void	*destroy_texture(t_img *texture)
 	if (texture->xpm)
 		mlx_destroy_image(texture->mlx, texture->xpm);
 	free(texture);
-	texture = NULL;
 	return (NULL);
 }

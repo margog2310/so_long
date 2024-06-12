@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:44:07 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/11 23:28:39 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/12 22:46:21 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,12 @@ int	close_window(t_game *game)
 {
 	if (game)
 	{
-		if (game->sprites)
-			ft_lstclear(&game->sprites, (void *)destroy_sprite);
 		if (game->map)
 			destroy_map(game->map);
 		if (game->img)
 			ft_lstclear(&game->img, (void *)free_images);
+		if (game->sprites)
+			ft_lstclear(&game->sprites, (void *)free);
 		if (game->win)
 			mlx_destroy_window(game->mlx, game->win);
 		if (game->mlx)

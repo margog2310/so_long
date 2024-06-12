@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:50:01 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/11 23:24:18 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/12 21:49:14 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ t_map	*read_file(int fd, t_map *map)
 	map->textures = NULL;
 	map->cols = ft_strlen(map->grid[0]) - 1;
 	map->rows = line_count;
-	map->x = 0;
-	map->y = 0;
 	return (map);
 }
 
@@ -61,15 +59,6 @@ void	free_grid(char **grid, int line_count)
 		i++;
 	}
 	free(grid);
-}
-
-int	free_file(char *buffer)
-{
-	if (buffer)
-		free(buffer);
-	else
-		return (0);
-	return (1);
 }
 
 int	close_file(int fd)
