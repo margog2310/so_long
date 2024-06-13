@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/12 22:03:44 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/13 18:23:59 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_sprite
 {
 	t_img	*texture;
 	t_point	position;
+	int		direction;
 }			t_sprite;
 
 // enemy struct
@@ -99,12 +100,14 @@ typedef struct s_game
 	int		bpp;
 	int		line_len;
 	int		endian;
+	bool	has_changed;
 	t_map	*map;
 	t_list	*sprites;
 }			t_game;
 
 // game
 t_game		*create_game(char *file_path);
+int			render_all(t_game *game);
 // window
 t_img		*new_image(t_game *game);
 t_game		*new_window(int w, int h, char *str);
@@ -113,6 +116,7 @@ void		*free_images(t_img *img);
 int			close_window(t_game *game);
 void		put_pixel_img(t_game *data, int x, int y, int colour);
 // keys
+int			move_left(int keysym, t_game *game);
 int			mouse_event(int button, int x, int y, void *param);
 int			on_keypress(int keysym, t_game *img);
 // maps

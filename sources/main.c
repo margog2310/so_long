@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:05:05 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/12 22:21:57 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/13 18:15:23 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ int	main(int argc, char *argv[])
 		if (game)
 		{
 			mlx_mouse_hook(game->win, &mouse_event, 0);
-			mlx_hook(game->win, KeyRelease, KeyReleaseMask, &on_keypress, game);
+			mlx_key_hook(game->win, &move_left, game);
+			mlx_hook(game->win, KeyPress, KeyReleaseMask, &move_left, game);
 			mlx_hook(game->win, DestroyNotify, NoEventMask, &close_window, game);
+			mlx_loop_hook(game->mlx, &render_all, game);
 			mlx_loop(game->mlx);
 			destroy_map(game->map);
 			close_window(game);

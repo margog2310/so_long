@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:35:26 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/12 23:25:05 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/13 18:24:14 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,21 @@ t_sprite	*create_sprite(t_game *game, char *asset_path, int x, int y)
 	return (sprite);
 }
 
-int	player_jump(int	keysym, t_game *game)
+/*int	player_jump(int	keysym, t_game *game)
 {
 	// do movement up (jump) + 3 more for other directions
+}*/
+
+int	move_left(int keysym, t_game *game)
+{
+	t_sprite	*player;
+
+	if (keysym == D)
+	{
+		player = (t_sprite *)game->sprites;
+		player->position.x += 16;
+		player->direction = 2;
+		game->has_changed = true;
+	}
+	return (0);
 }

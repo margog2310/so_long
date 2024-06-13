@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:44:07 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/12 22:46:21 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/13 18:24:34 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_game	*new_window(int w, int h, char *str)
 		return (close_window(game), NULL);
 	game->addr = mlx_get_data_addr(img->xpm, &game->bpp, &game->line_len,
 			&game->endian);
+	game->has_changed = false;
 	return (game);
 }
 
