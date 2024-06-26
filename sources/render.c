@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:08:21 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/26 21:35:17 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/26 22:32:07 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	render_all(t_game *game)
 {
 	t_img	*img;
-	
+
 	if (game->state.has_changed)
 	{
 		img = game->img->content;
@@ -30,6 +30,7 @@ int	render_all(t_game *game)
 	}
 	return (0);
 }
+
 void	initialize_player(t_game *game)
 {
 	int	i;

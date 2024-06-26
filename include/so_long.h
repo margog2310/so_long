@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/26 22:23:34 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/26 22:56:26 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,25 +141,23 @@ t_map			*read_file(int fd, t_map *map);
 t_map			*create_game_map(char *file_path);
 int				close_file(int fd);
 void			free_grid(char **grid, int line_count);
-bool			check_line_len(char **grid, int line_count);
-bool			check_map_symbols(char **grid, int line_count);
-bool			check_repeat(char **grid, int line_count);
-bool			check_borders(char **grid, int line_count);
-bool			check_if_boxed(char **grid, int line_count);
-bool			check_map_errors(char **grid, int line_count);
+bool			check_line_len(t_map *map);
+bool			check_map_symbols(t_map *map);
+bool			check_repeat(t_map *map);
+bool			check_borders(t_map *map);
+bool			check_if_boxed(t_map *map);
+bool			check_map_errors(t_map *map);
 void			destroy_map(t_map *map);
 // textures
 t_img			*create_texture(t_game *game, char *asset_path, int x, int y);
 void			load_textures(t_game *game);
 void			*destroy_texture(t_img *texture);
 // path finding
-bool			is_valid(char **grid, bool **visited, int row, int col,
-					int line_count);
-void			depth_first_search(char **grid, bool **visited, t_point current,
-					int *coins, int line_count);
-bool			is_path(char **grid, t_point start, t_point end, int *coins,
-					int line_count);
-bool			find_path(char **grid, int line_count);
+bool			is_valid(t_map *map, bool **visited, int row, int col);
+void			depth_first_search(t_map *map, bool **visited, t_point current,
+					int *coins);
+bool			is_path(t_map *map, t_point start, t_point end, int *coins);
+bool			find_path(t_map *map);
 // sprites
 t_sprite		*create_sprite(t_game *game, char *asset_path, int x, int y);
 void			draw_sprite(t_game *game, t_sprite *sprite);
