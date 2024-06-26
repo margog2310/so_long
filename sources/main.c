@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:05:05 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/15 16:41:54 by margo            ###   ########.fr       */
+/*   Updated: 2024/06/26 22:22:57 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,21 @@ t_game	*create_game(char *file_path)
 	if (!game || !game->mlx || !game->win)
 		return (destroy_map(map), close_window(game), NULL);
 	game->map = map;
-	draw_bgn((t_bgn){map->cols * TILE_SIZE, map->rows * TILE_SIZE, (map->cols
-			* TILE_SIZE) * (map->rows * TILE_SIZE), 0x000000}, game);
+	// draw_bgn((t_bgn){map->cols * TILE_SIZE, map->rows * TILE_SIZE, (map->cols
+	// 		* TILE_SIZE) * (map->rows * TILE_SIZE), 0x000000}, game);
+	initialize_player(game);
 	load_textures(game);
+	game->state.is_running = true;
+	game->state.has_changed = true;
 	return (game);
 }
 
+int	game_loop(t_game *game)
+{
+	if (game->state.is_running)
+		render_all(game);
+	return (0);
+}
 int	main(int argc, char *argv[])
 {
 	t_game	*game;
@@ -39,11 +48,10 @@ int	main(int argc, char *argv[])
 		game = create_game(argv[1]);
 		if (game)
 		{
-			mlx_mouse_hook(game->win, &mouse_event, 0);
-			mlx_key_hook(game->win, &move_left, game);
-			mlx_hook(game->win, KeyPress, KeyReleaseMask, &move_left, game);
-			mlx_hook(game->win, DestroyNotify, NoEventMask, &close_window, game);
-			//mlx_loop_hook(game->mlx, &render_all, game);
+			mlx_hook(game->win, KeyPress, KeyPressMask, handle_input, game);
+			mlx_hook(game->win, DestroyNotify, NoEventMask, close_window,
+				game);
+			mlx_loop_hook(game->mlx, &game_loop, game);
 			mlx_loop(game->mlx);
 			destroy_map(game->map);
 			close_window(game);

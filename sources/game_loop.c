@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_events.c                                     :+:      :+:    :+:   */
+/*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 17:32:45 by mganchev          #+#    #+#             */
-/*   Updated: 2024/05/31 02:03:20 by margo            ###   ########.fr       */
+/*   Created: 2024/06/26 17:18:10 by mganchev          #+#    #+#             */
+/*   Updated: 2024/06/26 22:14:24 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	mouse_event(int button, int x, int y, void *param)
+bool	game_is_running(t_game *game)
 {
-	(void)x;
-	(void)y;
-	(void)param;
-	return (ft_putnbr_fd(button, 1));
+	return (game->state.is_running);
 }
-
-int	on_keypress(int keysym, t_game *img)
+int	handle_input(int keysym, t_game *game)
 {
-	(void)img;
-	printf("Pressed key: %d\n", keysym);
+	if (keysym == D)
+		move_right(game);
+	if (keysym == A)
+		move_left(game);
+	if (keysym == W)
+		move_up(game);
+	if (keysym == S)
+		move_down(game);
 	return (0);
 }

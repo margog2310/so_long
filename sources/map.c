@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:27:15 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/13 17:58:43 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/26 21:03:21 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_map	*create_game_map(char *file_path)
 // generates a texture
 t_img	*create_texture(t_game *game, char *asset_path, int x, int y)
 {
-	t_img		*texture;
+	t_img	*texture;
 
 	texture = malloc(sizeof(t_img));
 	if (!texture)
@@ -41,7 +41,7 @@ t_img	*create_texture(t_game *game, char *asset_path, int x, int y)
 	texture->xpm = mlx_xpm_file_to_image(game->mlx, asset_path, &texture->w,
 			&texture->h);
 	texture->mlx = game->mlx;
-	if (!texture->xpm)  
+	if (!texture->xpm)
 		return (free(texture), close_window(game), NULL);
 	ft_lstadd_back(&game->map->textures, ft_lstnew(texture));
 	mlx_put_image_to_window(game->mlx, game->win, texture->xpm, x, y);
@@ -51,8 +51,8 @@ t_img	*create_texture(t_game *game, char *asset_path, int x, int y)
 // load all textures
 void	load_textures(t_game *game)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < game->map->rows)
@@ -60,8 +60,6 @@ void	load_textures(t_game *game)
 		j = 0;
 		while (game->map->grid[i][j] != '\0' && game->map->grid[i][j] != '\n')
 		{
-			if (get_char(game->map->grid, game->map->rows, j, i) == START)
-				create_sprite(game, MARIO, j * TILE_SIZE, i * TILE_SIZE);
 			if (get_char(game->map->grid, game->map->rows, j, i) == COIN)
 				create_texture(game, COLLECTIBLE, j * TILE_SIZE, i * TILE_SIZE);
 			if (get_char(game->map->grid, game->map->rows, j, i) == WALL)
