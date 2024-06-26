@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
+/*   By: margo <margo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:05:05 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/13 18:15:23 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/15 16:41:54 by margo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int argc, char *argv[])
 			mlx_key_hook(game->win, &move_left, game);
 			mlx_hook(game->win, KeyPress, KeyReleaseMask, &move_left, game);
 			mlx_hook(game->win, DestroyNotify, NoEventMask, &close_window, game);
-			mlx_loop_hook(game->mlx, &render_all, game);
+			//mlx_loop_hook(game->mlx, &render_all, game);
 			mlx_loop(game->mlx);
 			destroy_map(game->map);
 			close_window(game);
