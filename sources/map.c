@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:27:15 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/26 21:03:21 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/29 19:03:42 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,25 +69,20 @@ void	load_textures(t_game *game)
 		i++;
 	}
 }
-
-//  checks all possible map errors
-void	destroy_map(t_map *map)
+// check all map errors
+bool	check_map_errors(t_map *map)
 {
-	if (map)
-	{
-		if (map->grid)
-			free_grid(map->grid, map->rows);
-		if (map->textures)
-			ft_lstclear(&map->textures, (void *)destroy_texture);
-		free(map);
-	}
-}
-
-// destroy a texture
-void	*destroy_texture(t_img *texture)
-{
-	if (texture->xpm)
-		mlx_destroy_image(texture->mlx, texture->xpm);
-	free(texture);
-	return (NULL);
+	if (!check_line_len(map))
+		return (false);
+	if (!check_map_symbols(map))
+		return (false);
+	if (!check_repeat(map))
+		return (false);
+	if (!check_borders(map))
+		return (false);
+	if (!check_if_boxed(map))
+		return (false);
+	if (!find_path(map))
+		return (false);
+	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:44:07 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/26 21:18:34 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/29 18:59:55 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,37 +75,6 @@ void	draw_bgn(t_bgn bgn, t_game *game)
 		i++;
 	}
 	mlx_put_image_to_window(game->mlx, game->win, img->xpm, 0, 0);
-}
-
-void	*free_images(t_img *img)
-{
-	if (img->xpm)
-		mlx_destroy_image(img->mlx, img->xpm);
-	free(img);
-	img = NULL;
-	return (NULL);
-}
-
-int	close_window(t_game *game)
-{
-	if (game)
-	{
-		if (game->map)
-			destroy_map(game->map);
-		if (game->img)
-			ft_lstclear(&game->img, (void *)free_images);
-		if (game->sprites)
-			ft_lstclear(&game->sprites, (void *)free);
-		if (game->win)
-			mlx_destroy_window(game->mlx, game->win);
-		if (game->mlx)
-		{
-			mlx_destroy_display(game->mlx);
-			free(game->mlx);
-		}
-		free(game);
-	}
-	exit(EXIT_SUCCESS);
 }
 
 /*my_mlx_pixel_put(&img, 1280, 900, 0x00FF0000); //buffer pixels to img

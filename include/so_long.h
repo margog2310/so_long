@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/26 22:56:26 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/29 19:48:41 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define COIN 'C'
 # define EXIT 'E'
 # define START 'P'
+# define ENEMY 'M'
 
 // sprites
 # define MARIO "./assets/small-mario.xpm"
@@ -89,6 +90,7 @@ typedef struct s_map
 	char		**grid;
 	int			rows;
 	int			cols;
+	int			coins;
 	t_list		*textures;
 }				t_map;
 
@@ -154,9 +156,9 @@ void			load_textures(t_game *game);
 void			*destroy_texture(t_img *texture);
 // path finding
 bool			is_valid(t_map *map, bool **visited, int row, int col);
-void			depth_first_search(t_map *map, bool **visited, t_point current,
-					int *coins);
-bool			is_path(t_map *map, t_point start, t_point end, int *coins);
+void			depth_first_search(t_map *map, bool **visited, t_point current);
+bool			is_path(t_map *map, t_point start, t_point end);
+bool			validate_path(t_map *map, t_point start, char dest);
 bool			find_path(t_map *map);
 // sprites
 t_sprite		*create_sprite(t_game *game, char *asset_path, int x, int y);
