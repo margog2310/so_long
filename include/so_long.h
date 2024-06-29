@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/29 19:48:41 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/29 20:08:08 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define COIN 'C'
 # define EXIT 'E'
 # define START 'P'
-# define ENEMY 'M'
+# define MONSTER 'M'
 
 // sprites
 # define MARIO "./assets/small-mario.xpm"

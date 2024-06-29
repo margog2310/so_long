@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 22:04:04 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/29 19:45:28 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/29 20:31:03 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,25 @@
 // check that map is rectangular
 bool	check_line_len(t_map *map)
 {
-	int	i;
-	int	line_len;
-	int	next_line_len;
+    int	i;
+    int	first_line_len;
+    int	current_line_len;
 
-	if (map->grid == NULL)
-		return (false);
-	i = 0;
-	while (i < map->rows)
-	{
-		line_len = ft_strlen(map->grid[i]);
-		next_line_len = ft_strlen(map->grid[i + 1]);
-		if (!(line_len == next_line_len))
-		{
-			if (i + 2 <= map->rows)
-				break ;
-			else
-				return (false);
-		}
-		i++;
-	}
-	return (true);
+    if (map->grid == NULL)
+        return (false);
+    first_line_len = ft_strlen(map->grid[0]);
+    i = 1;
+    while (i < map->rows)
+    {
+        if (i == map->rows - 1)
+			current_line_len = ft_strlen(map->grid[i]) + 1;
+		else 
+        	current_line_len = ft_strlen(map->grid[i]);
+		if (current_line_len != first_line_len)
+            return (false);
+        i++;
+    }
+    return (true);
 }
 
 // check for invalid map symbols
