@@ -6,7 +6,7 @@
 #    By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 20:24:28 by mganchev          #+#    #+#              #
-#    Updated: 2024/06/29 19:04:57 by mganchev         ###   ########.fr        #
+#    Updated: 2024/06/30 22:05:39 by mganchev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,12 @@ OBJDIR =./build
 SRCS = $(SRCDIR)/main.c $(SRCDIR)/game_win.c $(SRCDIR)/movement.c $(SRCDIR)/sprites.c \
 $(SRCDIR)/so_long_utils.c $(SRCDIR)/get_next_line.c $(SRCDIR)/ft_printf.c $(SRCDIR)/map_file.c \
 $(SRCDIR)/map_errors.c $(SRCDIR)/find_path.c $(SRCDIR)/map.c $(SRCDIR)/render.c \
-$(SRCDIR)/game_loop.c $(SRCDIR)/close_game.c
+$(SRCDIR)/game_loop.c $(SRCDIR)/close_game.c $(SRCDIR)/collision.c
 
 OBJS = $(OBJDIR)/main.o $(OBJDIR)/game_win.o $(OBJDIR)/movement.o $(OBJDIR)/sprites.o \
 $(OBJDIR)/so_long_utils.o $(OBJDIR)/get_next_line.o $(OBJDIR)/ft_printf.o $(OBJDIR)/map_file.o \
 $(OBJDIR)/map_errors.o $(OBJDIR)/find_path.o $(OBJDIR)/map.o $(OBJDIR)/render.o \
-$(OBJDIR)/game_loop.o $(OBJDIR)/close_game.o
+$(OBJDIR)/game_loop.o $(OBJDIR)/close_game.o $(OBJDIR)/collision.o
 	
 all: $(OBJDIR) $(NAME)
 

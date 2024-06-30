@@ -6,11 +6,18 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 20:17:29 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/30 21:43:37 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/30 23:26:04 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+bool	check_bounds(t_bounds object, t_bounds obstacle)
+{
+	return (object.x < obstacle.x + obstacle.w && object.x
+		+ object.w > obstacle.x && object.y < obstacle.y + obstacle.h
+		&& object.y + object.h > obstacle.y);
+}
 
 bool	**find_obstacles(t_map *map)
 {
@@ -36,27 +43,26 @@ bool	**find_obstacles(t_map *map)
 	return (obstacles);
 }
 
-bool	check_collision(int keysym, t_game *game)
+bool	check_collision(t_game *game, t_point next)
 {
-	t_point	current;
+	t_bounds player;
+	t_bounds obstacle;
 	bool	**obstacles;
 
-	current = game->player->position;
+	player.x = game->player->position.x + next.x;
+	player.y = game->player->position.y + next.y;
+	player.w = TILE_SIZE;
+	player.h = TILE_SIZE;
 	obstacles = find_obstacles(game->map);
-	if (keysym == W && current.y > 0)
-		return (obstacles[current.y - 1][current.x]);
-	else if (keysym == S && current.y < game->map->rows - 1)
-		return (obstacles[current.y + 1][current.x]);
-	else if (keysym == A && current.x > 0)
-		return (obstacles[current.y][current.x - 1]);
-	else if (keysym == D && current.x < game->map->cols - 1)
-		return (obstacles[current.y][current.x + 1]);
-	return (false);
+	// check if next position is an obstacle based on obstacles array (coordinates * tile_size)
 }
-bool    check_collision_moving_objects(int keysym, t_sprite *sprite)
+// collisions for moving objects
+/*bool    check_collision_moving_objects(int keysym, t_sprite *sprite)
 {
-    t_point current;
-    t_point next;
+	t_point current;
+	t_point next;
 
-    
-}
+	current = sprite->position;
+	if (keysym == W && current.y > 0)
+		next.y -= SPEED;
+}*/

@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:32:45 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/30 21:42:45 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/30 22:09:20 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 int	move_right(t_game *game)
 {
-	game->player->position.x += SPEED;
-	game->player->direction = RIGHT;
-	game->state.has_changed = true;
+	if (check_collision(D, game) == false)
+	{
+		game->player->position.x += SPEED;
+		game->player->direction = RIGHT;
+		game->state.has_changed = true;
+	}
 	return (0);
 }
 

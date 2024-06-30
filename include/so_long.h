@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/30 21:42:13 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/30 22:27:02 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,14 @@ typedef struct s_point
 	int			y;
 }				t_point;
 
+typedef struct s_bounds
+{
+	int	x;
+	int	y;
+	int	w;
+	int	h;
+}	t_bounds;
+
 typedef struct s_img
 {
 	void		*mlx;
@@ -90,6 +98,7 @@ typedef struct s_sprite
 // coin struct ???
 // all of them should be included in t_game and potentially in t_map ??
 // then you use mlx_put_img_to_win with those coordinates
+
 typedef struct s_map
 {
 	char		**grid;
@@ -137,11 +146,14 @@ void			draw_bgn(t_bgn bgn, t_game *game);
 void			*free_images(t_img *img);
 int				close_window(t_game *game);
 void			put_pixel_img(t_game *data, int x, int y, int colour);
-// keys
+// movement
 int				move_right(t_game *game);
 int				move_left(t_game *game);
 int				move_up(t_game *game);
 int				move_down(t_game *game);
+// collisions
+bool			**find_obstacles(t_map *map);
+bool			check_collision(int keysym, t_game *game);
 // maps
 int				open_file(char *path);
 t_map			*read_file(int fd, t_map *map);
