@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 20:19:30 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/29 19:44:04 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/30 20:31:07 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ void	depth_first_search(t_map *map, bool **visited, t_point current)
 	col_vector[1] = 0;
 	col_vector[2] = 1;
 	col_vector[3] = 0;
-	visited[current.x][current.y] = true;
+	visited[current.y][current.x] = true;
 	i = 0;
 	while (i < 4)
 	{
-		if (is_valid(map, visited, current.x + row_vector[i], current.y
+		if (is_valid(map, visited, current.y + row_vector[i], current.x
 				+ col_vector[i]))
 			depth_first_search(map, visited, (t_point){current.x
-				+ row_vector[i], current.y + col_vector[i]});
+				+ col_vector[i], current.y + row_vector[i]});
 		i++;
 	}
 }
@@ -62,10 +62,11 @@ bool	is_path(t_map *map, t_point start, t_point end)
 	cols = map->cols;
 	visited = (bool **)ft_allocate_grid(rows, cols, sizeof(bool));
 	depth_first_search(map, visited, start);
-	if (visited[end.x][end.y])
+	if (visited[end.y][end.x])
 		return (free_grid((char **)visited, rows), true);
 	return (free_grid((char **)visited, rows), false);
 }
+
 // checks if coins/exit is reachable from start
 bool	validate_path(t_map *map, t_point start, char dest)
 {
@@ -82,8 +83,8 @@ bool	validate_path(t_map *map, t_point start, char dest)
 			if ((dest == EXIT && map->grid[i][j] == EXIT) || (dest == COIN
 					&& map->grid[i][j] == COIN))
 			{
-				end.x = i;
-				end.y = j;
+				end.y = i;
+				end.x = j;
 				if (!is_path(map, start, end))
 					return (false);
 			}
@@ -106,8 +107,8 @@ bool	find_path(t_map *map)
 		symbol = ft_strchr(map->grid[i], START);
 		if (symbol)
 		{
-			start.x = i;
-			start.y = symbol - map->grid[i];
+			start.y = i;
+			start.x = symbol - map->grid[i];
 			if (!validate_path(map, start, EXIT))
 				return (false);
 			if (!validate_path(map, start, COIN))

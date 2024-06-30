@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:32:45 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/26 22:30:13 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/30 21:42:45 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	move_right(t_game *game)
 {
 	game->player->position.x += SPEED;
-	game->player->direction = 2;
+	game->player->direction = RIGHT;
 	game->state.has_changed = true;
 	return (0);
 }
@@ -23,7 +23,7 @@ int	move_right(t_game *game)
 int	move_left(t_game *game)
 {
 	game->player->position.x -= SPEED;
-	game->player->direction = 1;
+	game->player->direction = LEFT;
 	game->state.has_changed = true;
 	return (0);
 }
@@ -31,7 +31,7 @@ int	move_left(t_game *game)
 int	move_up(t_game *game)
 {
 	game->player->position.y -= SPEED;
-	game->player->direction = 3;
+	game->player->direction = UP;
 	game->state.has_changed = true;
 	return (0);
 }
@@ -39,7 +39,7 @@ int	move_up(t_game *game)
 int	move_down(t_game *game)
 {
 	game->player->position.y += SPEED;
-	game->player->direction = 4;
+	game->player->direction = DOWN;
 	game->state.has_changed = true;
 	return (0);
 }

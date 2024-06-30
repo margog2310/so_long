@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/29 20:08:08 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/06/30 21:42:13 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@
 
 # define TILE_SIZE 32
 # define SPEED 8
+
+# define UP 0
+# define DOWN 1
+# define LEFT 2
+# define RIGHT 3
 
 # define W 119
 # define A 97
