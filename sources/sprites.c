@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:35:26 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/26 22:31:31 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/04 16:56:37 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@ t_sprite	*create_sprite(t_game *game, char *asset_path, int x, int y)
 	sprite = malloc(sizeof(t_sprite));
 	if (!sprite)
 		return (NULL);
-	sprite->texture = create_texture(game, asset_path, x, y);
+	sprite->texture = create_texture(game, asset_path);
 	sprite->position.x = x;
 	sprite->position.y = y;
 	sprite->velocity.x = 0;
 	sprite->velocity.y = 0;
-	ft_lstadd_back(&game->sprites, ft_lstnew(sprite));
 	return (sprite);
 }
 

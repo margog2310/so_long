@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:59:23 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/29 19:04:17 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/04 18:06:11 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,12 @@ void	destroy_map(t_map *map)
 	{
 		if (map->grid)
 			free_grid(map->grid, map->rows);
-		if (map->textures)
-			ft_lstclear(&map->textures, (void *)destroy_texture);
+		if (map->coin)
+			free_images(map->coin);
+		if (map->wall)
+			free_images(map->wall);
+		if (map->exit)
+			free_images(map->exit);
 		free(map);
 	}
 }
@@ -42,6 +46,12 @@ void	*destroy_texture(t_img *texture)
 	return (NULL);
 }
 
+void	handle_error(t_game *game)
+{
+	ft_printf("Error\n");
+	if (game)
+		close_window(game);
+}
 int	close_window(t_game *game)
 {
 	if (game)
@@ -50,8 +60,11 @@ int	close_window(t_game *game)
 			destroy_map(game->map);
 		if (game->img)
 			ft_lstclear(&game->img, (void *)free_images);
-		if (game->sprites)
-			ft_lstclear(&game->sprites, (void *)free);
+		if (game->player)
+		{
+			free_images(game->player->texture);
+			free(game->player);
+		}
 		if (game->win)
 			mlx_destroy_window(game->mlx, game->win);
 		if (game->mlx)

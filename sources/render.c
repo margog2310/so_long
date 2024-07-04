@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:08:21 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/26 22:32:07 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/04 17:58:51 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,20 @@
 
 int	render_all(t_game *game)
 {
-	t_img	*img;
-
 	if (game->state.has_changed)
 	{
-		img = game->img->content;
-		mlx_put_image_to_window(game->mlx, game->win, img->xpm, 0, 0);
 		mlx_clear_window(game->mlx, game->win);
 		draw_bgn((t_bgn){game->map->cols * TILE_SIZE, game->map->rows
 			* TILE_SIZE, (game->map->cols * TILE_SIZE) * (game->map->rows
 				* TILE_SIZE), 0x000000}, game);
-		draw_sprite(game, game->player);
 		load_textures(game);
+		draw_sprite(game, game->player);
 		game->state.has_changed = false;
 	}
 	return (0);
 }
 
-void	initialize_player(t_game *game)
+void	load_textures(t_game *game)
 {
 	int	i;
 	int	j;
@@ -42,12 +38,15 @@ void	initialize_player(t_game *game)
 		j = 0;
 		while (game->map->grid[i][j] != '\0' && game->map->grid[i][j] != '\n')
 		{
-			if (get_char(game->map->grid, game->map->rows, j, i) == START)
-			{
-				game->player = create_sprite(game, MARIO, j * TILE_SIZE, i
-						* TILE_SIZE);
-				return ;
-			}
+			if (game->map->grid[i][j] == COIN)
+				mlx_put_image_to_window(game->mlx, game->win,
+					game->map->coin->xpm, j * TILE_SIZE, i * TILE_SIZE);
+			if (game->map->grid[i][j] == WALL)
+				mlx_put_image_to_window(game->mlx, game->win,
+					game->map->wall->xpm, j * TILE_SIZE, i * TILE_SIZE);
+			if (game->map->grid[i][j] == EXIT && game->map->coin_count < 1)
+				mlx_put_image_to_window(game->mlx, game->win,
+					game->map->exit->xpm, j * TILE_SIZE, i * TILE_SIZE);
 			j++;
 		}
 		i++;

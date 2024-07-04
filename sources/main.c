@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:05:05 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/26 23:08:17 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/04 18:11:37 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,30 @@ t_game	*create_game(char *file_path)
 
 	map = create_game_map(file_path);
 	if (!map)
-		return (destroy_map(map), NULL);
+		return (destroy_map(map), ft_printf("Error\n"), NULL);
 	game = new_window(map->cols * TILE_SIZE, map->rows * TILE_SIZE, "Game");
 	if (!game || !game->mlx || !game->win)
-		return (destroy_map(map), close_window(game), NULL);
+		return (handle_error(game), NULL);
 	game->map = map;
+	initialise_textures(game);
 	initialize_player(game);
+	initialise_game_state(game);
 	load_textures(game);
-	game->state.is_running = true;
-	game->state.has_changed = true;
 	return (game);
 }
-
+void	initialise_game_state(t_game *game)
+{
+	game->state.is_running = true;
+	game->state.has_changed = true;
+	game->state.has_won = false;
+	game->state.is_dead = false;
+}
 int	game_loop(t_game *game)
 {
 	if (game->state.is_running)
 		render_all(game);
+	if (game->state.has_won)
+		close_window(game);
 	return (0);
 }
 
@@ -51,12 +59,11 @@ int	main(int argc, char *argv[])
 			mlx_hook(game->win, DestroyNotify, NoEventMask, close_window, game);
 			mlx_loop_hook(game->mlx, &game_loop, game);
 			mlx_loop(game->mlx);
-			destroy_map(game->map);
 			close_window(game);
 		}
 	}
 	else
-		ft_printf("%s", "Error\n");
+		ft_printf("Error\n");
 	return (0);
 }
 /* order of operations:

@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:27:15 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/29 19:03:42 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/04 18:16:25 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_map	*create_game_map(char *file_path)
 
 	fd = open_file(file_path);
 	if (fd < 0)
-		return (ft_printf("Error\n"), NULL);
+		return (NULL);
 	map = malloc(sizeof(t_map));
 	if (!map)
 		return (NULL);
@@ -31,7 +31,7 @@ t_map	*create_game_map(char *file_path)
 }
 
 // generates a texture
-t_img	*create_texture(t_game *game, char *asset_path, int x, int y)
+t_img	*create_texture(t_game *game, char *asset_path)
 {
 	t_img	*texture;
 
@@ -42,14 +42,18 @@ t_img	*create_texture(t_game *game, char *asset_path, int x, int y)
 			&texture->h);
 	texture->mlx = game->mlx;
 	if (!texture->xpm)
-		return (free(texture), close_window(game), NULL);
-	ft_lstadd_back(&game->map->textures, ft_lstnew(texture));
-	mlx_put_image_to_window(game->mlx, game->win, texture->xpm, x, y);
+		return (free(texture), handle_error(game), NULL);
 	return (texture);
 }
 
 // load all textures
-void	load_textures(t_game *game)
+void	initialise_textures(t_game *game)
+{
+	game->map->coin = create_texture(game, COLLECTIBLE);
+	game->map->wall = create_texture(game, PLATFORM);
+	game->map->exit = create_texture(game, FINISH);
+}
+void	initialize_player(t_game *game)
 {
 	int	i;
 	int	j;
@@ -60,15 +64,18 @@ void	load_textures(t_game *game)
 		j = 0;
 		while (game->map->grid[i][j] != '\0' && game->map->grid[i][j] != '\n')
 		{
-			if (get_char(game->map->grid, game->map->rows, j, i) == COIN)
-				create_texture(game, COLLECTIBLE, j * TILE_SIZE, i * TILE_SIZE);
-			if (get_char(game->map->grid, game->map->rows, j, i) == WALL)
-				create_texture(game, PLATFORM, j * TILE_SIZE, i * TILE_SIZE);
+			if (get_char(game->map->grid, game->map->rows, j, i) == START)
+			{
+				game->player = create_sprite(game, MARIO, j * TILE_SIZE, i
+						* TILE_SIZE);
+				return ;
+			}
 			j++;
 		}
 		i++;
 	}
 }
+
 // check all map errors
 bool	check_map_errors(t_map *map)
 {

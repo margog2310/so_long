@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:44:07 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/29 18:59:55 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/04 18:15:44 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ t_img	*new_image(t_game *game)
 
 	img = malloc(sizeof(t_img));
 	if (!img)
-		return (close_window(game), NULL);
+		return (handle_error(game), NULL);
 	img->mlx = game->mlx;
 	img->xpm = mlx_new_image(game->mlx, game->w, game->h);
 	if (!img->xpm)
-		return (free(img), close_window(game), NULL);
+		return (free(img), handle_error(game), NULL);
 	ft_lstadd_back(&game->img, ft_lstnew(img));
 	return (img);
 }
@@ -40,14 +40,13 @@ t_game	*new_window(int w, int h, char *str)
 		return (free(game), NULL);
 	game->win = mlx_new_window(game->mlx, w, h, str);
 	if (!game->win)
-		return (close_window(game), NULL);
+		return (handle_error(game), NULL);
 	game->w = w;
 	game->h = h;
-	game->sprites = NULL;
 	game->img = NULL;
 	img = new_image(game);
 	if (!img)
-		return (close_window(game), NULL);
+		return (handle_error(game), NULL);
 	game->addr = mlx_get_data_addr(img->xpm, &game->bpp, &game->line_len,
 			&game->endian);
 	return (game);

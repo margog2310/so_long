@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/30 22:27:02 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/04 18:20:47 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,13 @@
 # define PLATFORM "./assets/block.xpm"
 # define COLLECTIBLE "./assets/coin.xpm"
 # define ENTER "./assets/pipe.xpm"
-# define FINISH // draw castle or flag pole basically (rip)
+# define FINISH "./assets/flagpole.xpm"
 
 typedef struct s_point
 {
 	int			x;
 	int			y;
 }				t_point;
-
-typedef struct s_bounds
-{
-	int	x;
-	int	y;
-	int	w;
-	int	h;
-}	t_bounds;
 
 typedef struct s_img
 {
@@ -94,25 +86,28 @@ typedef struct s_sprite
 }				t_sprite;
 
 // enemy struct
-// player struct
-// coin struct ???
-// all of them should be included in t_game and potentially in t_map ??
-// then you use mlx_put_img_to_win with those coordinates
-
+typedef struct s_bounds
+{
+	int			x;
+	int			y;
+	int			w;
+	int			h;
+}				t_bounds;
 typedef struct s_map
 {
 	char		**grid;
 	int			rows;
 	int			cols;
-	int			coins;
-	t_list		*textures;
+	int			coin_count;
+	t_img		*wall;
+	t_img		*coin;
+	t_img		*exit;
 }				t_map;
 
 typedef struct s_state
 {
 	bool		is_running;
 	bool		has_won;
-	bool		has_lost;
 	bool		is_dead;
 	bool		has_changed;
 }				t_state;
@@ -129,16 +124,17 @@ typedef struct s_game
 	int			endian;
 	t_state		state;
 	t_map		*map;
-	t_list		*sprites;
 	t_sprite	*player;
 }				t_game;
 
 // game
 t_game			*create_game(char *file_path);
+void			initialise_game_state(t_game *game);
 int				game_loop(t_game *game);
 int				render_all(t_game *game);
 bool			game_is_running(t_game *game);
 int				handle_input(int keysym, t_game *game);
+void			handle_error(t_game *game);
 // window
 t_img			*new_image(t_game *game);
 t_game			*new_window(int w, int h, char *str);
@@ -152,8 +148,11 @@ int				move_left(t_game *game);
 int				move_up(t_game *game);
 int				move_down(t_game *game);
 // collisions
-bool			**find_obstacles(t_map *map);
-bool			check_collision(int keysym, t_game *game);
+t_bounds		player_bounds(t_sprite *player, t_point next);
+bool			check_wall_collision(t_game *game, t_bounds player);
+void			collect_coins(t_game *game, t_bounds player);
+bool			has_won(t_game *game, t_bounds player);
+bool			check_collision(t_game *game, t_point next);
 // maps
 int				open_file(char *path);
 t_map			*read_file(int fd, t_map *map);
@@ -168,7 +167,8 @@ bool			check_if_boxed(t_map *map);
 bool			check_map_errors(t_map *map);
 void			destroy_map(t_map *map);
 // textures
-t_img			*create_texture(t_game *game, char *asset_path, int x, int y);
+t_img			*create_texture(t_game *game, char *asset_path);
+void			initialise_textures(t_game *game);
 void			load_textures(t_game *game);
 void			*destroy_texture(t_img *texture);
 // path finding

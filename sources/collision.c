@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 20:17:29 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/30 23:26:04 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/04 18:01:11 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,51 +18,90 @@ bool	check_bounds(t_bounds object, t_bounds obstacle)
 		+ object.w > obstacle.x && object.y < obstacle.y + obstacle.h
 		&& object.y + object.h > obstacle.y);
 }
-
-bool	**find_obstacles(t_map *map)
+t_bounds	player_bounds(t_sprite *player, t_point next)
 {
-	int		i;
-	int		j;
-	bool	**obstacles;
+	t_bounds	player_bounds;
 
-	i = 0;
-	obstacles = (bool **)ft_allocate_grid(map->rows, map->cols, sizeof(bool));
-	while (i < map->rows)
+	player_bounds.x = player->position.x + next.x;
+	player_bounds.y = player->position.y + next.y;
+	player_bounds.w = TILE_SIZE;
+	player_bounds.h = TILE_SIZE;
+	return (player_bounds);
+}
+
+bool	check_wall_collision(t_game *game, t_bounds player)
+{
+	t_point		position;
+	t_bounds	obstacle;
+
+	position.y = 0;
+	while (position.y < game->map->rows)
 	{
-		j = 0;
-		while (map->grid[i][j] != '\n' && map->grid[i][j] != '\0')
+		position.x = 0;
+		while (position.x < game->map->cols)
 		{
-			if (map->grid[i][j] == WALL)
-				obstacles[i][j] = true;
-			else
-				obstacles[i][j] = false;
-			j++;
+			if (game->map->grid[position.y][position.x] == WALL)
+			{
+				obstacle = (t_bounds){position.x * TILE_SIZE, position.y
+					* TILE_SIZE, TILE_SIZE, TILE_SIZE};
+				if (check_bounds(player, obstacle))
+					return (true);
+			}
+			position.x++;
 		}
-		i++;
+		position.y++;
 	}
-	return (obstacles);
+	return (false);
 }
 
-bool	check_collision(t_game *game, t_point next)
+void	collect_coins(t_game *game, t_bounds player)
 {
-	t_bounds player;
-	t_bounds obstacle;
-	bool	**obstacles;
+	t_point		position;
+	t_bounds	coin;
 
-	player.x = game->player->position.x + next.x;
-	player.y = game->player->position.y + next.y;
-	player.w = TILE_SIZE;
-	player.h = TILE_SIZE;
-	obstacles = find_obstacles(game->map);
-	// check if next position is an obstacle based on obstacles array (coordinates * tile_size)
+	position.y = 0;
+	while (position.y < game->map->rows)
+	{
+		position.x = 0;
+		while (position.x < game->map->cols)
+		{
+			if (game->map->grid[position.y][position.x] == COIN)
+			{
+				coin = (t_bounds){position.x * TILE_SIZE, position.y
+					* TILE_SIZE, TILE_SIZE, TILE_SIZE};
+				if (check_bounds(player, coin))
+				{
+					game->map->grid[position.y][position.x] = SPACE;
+					game->map->coin_count--;
+				}
+			}
+			position.x++;
+		}
+		position.y++;
+	}
 }
-// collisions for moving objects
-/*bool    check_collision_moving_objects(int keysym, t_sprite *sprite)
-{
-	t_point current;
-	t_point next;
 
-	current = sprite->position;
-	if (keysym == W && current.y > 0)
-		next.y -= SPEED;
-}*/
+bool	has_won(t_game *game, t_bounds player)
+{
+	t_point		position;
+	t_bounds	exit;
+
+	position.y = 0;
+	while (position.y < game->map->rows)
+	{
+		position.x = 0;
+		while (position.x < game->map->cols)
+		{
+			if (game->map->grid[position.y][position.x] == EXIT)
+			{
+				exit = (t_bounds){position.x * TILE_SIZE, position.y
+					* TILE_SIZE, TILE_SIZE, TILE_SIZE};
+				if (check_bounds(player, exit))
+					return (true);
+			}
+			position.x++;
+		}
+		position.y++;
+	}
+	return (false);
+}

@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 22:04:04 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/29 20:31:03 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/04 16:31:23 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ bool	check_repeat(t_map *map)
 	i = 0;
 	exit = 0;
 	start = 0;
-	map->coins = 0;
+	map->coin_count = 0;
 	while (i < map->rows)
 	{
 		j = 0;
@@ -78,12 +78,12 @@ bool	check_repeat(t_map *map)
 		{
 			exit += map->grid[i][j] == EXIT;
 			start += map->grid[i][j] == START;
-			map->coins += map->grid[i][j] == COIN;
+			map->coin_count += map->grid[i][j] == COIN;
 			j++;
 		}
 		i++;
 	}
-	return (exit == 1 && start == 1 && map->coins >= 1);
+	return (exit == 1 && start == 1 && map->coin_count >= 1);
 }
 
 // check that map edges are WALL
