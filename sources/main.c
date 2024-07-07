@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:05:05 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/07 22:13:32 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/07 23:04:47 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int argc, char *argv[])
 
 /*
 BONUS:
-		1. add sprite animations: done BUT *flip mario sprites if moving left
+		1. add coin animations
 		2. enemy patrol
 		3. display moves on screen
 */
