@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:18:32 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/11 23:29:45 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/07 18:26:50 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ void	put_pixel_img(t_game *game_img, int x, int y, int colour)
 					/ 8));
 		*(unsigned int *)dst = colour;
 	}
+}
+
+void	draw_sprite(t_game *game, t_sprite *sprite)
+{
+	mlx_put_image_to_window(game->mlx, game->win, sprite->texture->xpm,
+		sprite->position.x, sprite->position.y);
 }
 
 char	get_char(char **grid, int line_count, int x, int y)

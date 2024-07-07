@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:05:05 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/07 17:30:49 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/07 22:13:32 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ t_game	*create_game(char *file_path)
 	if (!game || !game->mlx || !game->win)
 		return (handle_error(game), NULL);
 	game->map = map;
+	initialise_game_state(game);
 	initialise_textures(game);
 	initialize_player(game);
-	initialise_game_state(game);
+	initialize_enemies(game);
 	load_textures(game);
 	return (game);
 }
@@ -36,7 +37,7 @@ void	initialise_game_state(t_game *game)
 	game->state.is_running = true;
 	game->state.has_changed = true;
 	game->state.has_won = false;
-	game->state.is_dead = false;
+	game->state.has_lost = false;
 }
 
 int	game_loop(t_game *game)
@@ -68,3 +69,10 @@ int	main(int argc, char *argv[])
 		ft_printf("Error\n");
 	return (0);
 }
+
+/*
+BONUS:
+		1. add sprite animations: done BUT *flip mario sprites if moving left
+		2. enemy patrol
+		3. display moves on screen
+*/

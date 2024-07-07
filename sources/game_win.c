@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:44:07 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/04 18:15:44 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/07 22:53:11 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ t_game	*new_window(int w, int h, char *str)
 		return (handle_error(game), NULL);
 	game->addr = mlx_get_data_addr(img->xpm, &game->bpp, &game->line_len,
 			&game->endian);
+	game->move_counter = 0;
+	game->goombas = NULL;
 	return (game);
 }
 

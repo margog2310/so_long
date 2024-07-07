@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 20:17:29 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/07 17:32:09 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/07 20:04:52 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ bool	has_won(t_game *game, t_bounds player)
 	t_point		position;
 	t_bounds	exit;
 
+	if (game->map->coin_count >= 1)
+		return (false);
 	position.y = 0;
 	while (position.y < game->map->rows)
 	{

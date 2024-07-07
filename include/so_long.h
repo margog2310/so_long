@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/07 17:25:53 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/07 23:02:58 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 # define TILE_SIZE 32
 # define SPEED 8
 
+# define FPS 60
+# define DELAY (1000000 / FPS)
+
 # define UP 0
 # define DOWN 1
 # define LEFT 2
@@ -46,12 +49,20 @@
 # define MONSTER 'M'
 
 // sprites
-# define MARIO "./assets/small-mario.xpm"
-# define ENEMY "./assets/goomba.xpm"
+# define MARIO "./assets/mario_idle.xpm"
+# define ANIM1_RIGHT "./assets/mario_run_1_right.xpm"
+# define ANIM1_LEFT "./assets/mario_run_1_left.xpm"
+# define ANIM2_RIGHT "./assets/mario_run_2_right.xpm"
+# define ANIM2_LEFT "./assets/mario_run_2_left.xpm"
+# define ANIM3_RIGHT "./assets/mario_run_3_right.xpm"
+# define ANIM3_LEFT "./assets/mario_run_3_left.xpm"
+# define MARIO_DEAD "./assets/mario_dead.xpm"
+# define ENEMY_ANIM1 "./assets/goomba_walk_1.xpm"
+# define ENEMY_ANIM2 "./assets/goomba_walk_2.xpm"
+# define ENEMY_DEAD "./assets/goomba_dead.xpm"
 // map tiles
 # define PLATFORM "./assets/block.xpm"
 # define COLLECTIBLE "./assets/coin.xpm"
-# define ENTER "./assets/pipe.xpm"
 # define FINISH "./assets/flagpole.xpm"
 
 typedef struct s_point
@@ -76,16 +87,32 @@ typedef struct s_bgn
 	int			colour;
 }				t_bgn;
 
+enum			sprite
+{
+	PLAYER,
+	ENEMY,
+	COINS,
+};
+typedef struct s_animation
+{
+	t_img		**frames;
+	int			w;
+	int			h;
+	int			frame_count;
+	int			current_frame;
+	// enum sprite	sprite;
+}				t_animation;
 typedef struct s_sprite
 {
+	t_animation	*animations;
 	t_img		*texture;
+	t_img		*dead;
 	t_point		position;
-	t_point		velocity;
+	bool		is_moving;
+	bool		is_dead;
 	int			direction;
-
 }				t_sprite;
 
-// enemy struct
 typedef struct s_bounds
 {
 	int			x;
@@ -93,6 +120,7 @@ typedef struct s_bounds
 	int			w;
 	int			h;
 }				t_bounds;
+
 typedef struct s_map
 {
 	char		**grid;
@@ -108,7 +136,7 @@ typedef struct s_state
 {
 	bool		is_running;
 	bool		has_won;
-	bool		is_dead;
+	bool		has_lost;
 	bool		has_changed;
 }				t_state;
 typedef struct s_game
@@ -123,9 +151,11 @@ typedef struct s_game
 	int			line_len;
 	int			endian;
 	int			move_counter;
+	int			enemy_index;
 	t_state		state;
 	t_map		*map;
 	t_sprite	*player;
+	t_sprite	**goombas;
 }				t_game;
 
 // game
@@ -149,6 +179,7 @@ int				move_right(t_game *game);
 int				move_left(t_game *game);
 int				move_up(t_game *game);
 int				move_down(t_game *game);
+bool			player_is_moving(t_game *game);
 // collisions
 t_bounds		player_bounds(t_sprite *player, t_point next);
 bool			check_wall_collision(t_game *game, t_bounds player);
@@ -171,6 +202,8 @@ void			destroy_map(t_map *map);
 // textures
 t_img			*create_texture(t_game *game, char *asset_path);
 void			initialise_textures(t_game *game);
+void			initialise_player_textures(t_game *game);
+void			initialise_enemy_textures(t_game *game, t_sprite *goomba);
 void			load_textures(t_game *game);
 void			*destroy_texture(t_img *texture);
 // path finding
@@ -183,6 +216,14 @@ bool			find_path(t_map *map);
 t_sprite		*create_sprite(t_game *game, char *asset_path, int x, int y);
 void			draw_sprite(t_game *game, t_sprite *sprite);
 void			initialize_player(t_game *game);
+void			initialize_enemies(t_game *game);
+void			destroy_sprite(t_sprite *sprite);
+void			destroy_enemies(t_game *game);
+// animations
+void			move_right_animation(t_game *game, t_sprite *player);
+void			move_left_animation(t_game *game, t_sprite *player);
+void			update_player_animation(t_game *game, t_sprite *player);
+void			update_goomba_animation(t_game *game, t_sprite *goomba);
 // colours
 int				gen_trgb(int opacity, int red, int green, int blue);
 int				get_opacity(int trgb);

@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:08:21 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/04 17:58:51 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/07 22:14:47 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	render_all(t_game *game)
 			* TILE_SIZE, (game->map->cols * TILE_SIZE) * (game->map->rows
 				* TILE_SIZE), 0x000000}, game);
 		load_textures(game);
-		draw_sprite(game, game->player);
+		update_player_animation(game, game->player);
+		draw_sprite(game, game->goombas[0]);
 		game->state.has_changed = false;
 	}
 	return (0);

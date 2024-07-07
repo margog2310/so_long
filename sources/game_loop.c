@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:18:10 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/07 17:31:03 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/07 20:26:34 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,26 @@ bool	game_is_running(t_game *game)
 	return (game->state.is_running);
 }
 
+bool	player_is_moving(t_game *game)
+{
+	return (game->player->is_moving);
+}
+
 int	handle_input(int keysym, t_game *game)
 {
-	if (keysym == D)
-		move_right(game);
-	if (keysym == A)
-		move_left(game);
-	if (keysym == W)
-		move_up(game);
-	if (keysym == S)
-		move_down(game);
-	if (keysym == ESC)
+	if (keysym == W || keysym == A || keysym == S || keysym == D)
+	{
+		game->player->is_moving = true;
+		if (keysym == D)
+			move_right(game);
+		if (keysym == A)
+			move_left(game);
+		if (keysym == W)
+			move_up(game);
+		if (keysym == S)
+			move_down(game);
+	}
+	else if (keysym == ESC)
 		close_window(game);
 	return (0);
 }

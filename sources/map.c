@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:27:15 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/07 17:29:27 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/07 18:06:08 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,29 +52,6 @@ void	initialise_textures(t_game *game)
 	game->map->coin = create_texture(game, COLLECTIBLE);
 	game->map->wall = create_texture(game, PLATFORM);
 	game->map->exit = create_texture(game, FINISH);
-}
-
-void	initialize_player(t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < game->map->rows)
-	{
-		j = 0;
-		while (game->map->grid[i][j] != '\0' && game->map->grid[i][j] != '\n')
-		{
-			if (get_char(game->map->grid, game->map->rows, j, i) == START)
-			{
-				game->player = create_sprite(game, MARIO, j * TILE_SIZE, i
-						* TILE_SIZE);
-				return ;
-			}
-			j++;
-		}
-		i++;
-	}
 }
 
 // check all map errors
