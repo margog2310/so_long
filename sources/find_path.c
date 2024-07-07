@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 20:19:30 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/30 20:31:07 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/07 17:29:10 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ bool	is_path(t_map *map, t_point start, t_point end)
 // checks if coins/exit is reachable from start
 bool	validate_path(t_map *map, t_point start, char dest)
 {
-	int i;
-	int	j;
+	int		i;
+	int		j;
 	t_point	end;
 
 	i = 0;
@@ -94,6 +94,7 @@ bool	validate_path(t_map *map, t_point start, char dest)
 	}
 	return (true);
 }
+
 // locates START and EXIT/COIN and finds a path
 bool	find_path(t_map *map)
 {
@@ -117,5 +118,5 @@ bool	find_path(t_map *map)
 		}
 		i++;
 	}
-    return (false);
+	return (false);
 }

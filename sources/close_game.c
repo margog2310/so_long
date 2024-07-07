@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:59:23 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/04 18:06:11 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/07 17:31:46 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	handle_error(t_game *game)
 	if (game)
 		close_window(game);
 }
+
 int	close_window(t_game *game)
 {
 	if (game)

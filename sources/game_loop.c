@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:18:10 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/04 17:59:39 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/07 17:31:03 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ bool	check_collision(t_game *game, t_point next)
 	{
 		game->state.has_won = true;
 		return (true);
-	}		
+	}
 	return (false);
 }

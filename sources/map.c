@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:27:15 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/04 18:16:25 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/07 17:29:27 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	initialise_textures(t_game *game)
 	game->map->wall = create_texture(game, PLATFORM);
 	game->map->exit = create_texture(game, FINISH);
 }
+
 void	initialize_player(t_game *game)
 {
 	int	i;

@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 20:17:29 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/04 18:01:11 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/07 17:32:09 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ bool	check_bounds(t_bounds object, t_bounds obstacle)
 		+ object.w > obstacle.x && object.y < obstacle.y + obstacle.h
 		&& object.y + object.h > obstacle.y);
 }
+
 t_bounds	player_bounds(t_sprite *player, t_point next)
 {
 	t_bounds	player_bounds;

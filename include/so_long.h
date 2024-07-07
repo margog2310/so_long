@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/04 18:20:47 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/07 17:25:53 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ typedef struct s_game
 	int			bpp;
 	int			line_len;
 	int			endian;
+	int			move_counter;
 	t_state		state;
 	t_map		*map;
 	t_sprite	*player;
@@ -135,6 +136,7 @@ int				render_all(t_game *game);
 bool			game_is_running(t_game *game);
 int				handle_input(int keysym, t_game *game);
 void			handle_error(t_game *game);
+void			print_moves(t_game *game);
 // window
 t_img			*new_image(t_game *game);
 t_game			*new_window(int w, int h, char *str);
