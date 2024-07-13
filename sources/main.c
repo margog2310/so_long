@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:05:05 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/13 03:44:51 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/13 03:47:29 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,5 @@ BONUS:
 		//1. add coin animations
 		2. enemy patrol > fix player enemy collision + has_lost game state 
 		//3. display moves on screen
+		4. clean up code + test
 */
