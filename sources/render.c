@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:08:21 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/13 03:06:59 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/13 03:41:35 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	render_all(t_game *game)
 		load_textures(game);
 		update_player_animation(game, game->player);
 		// draw_sprite(game, game->goombas[0]);
+		print_moves(game);
 		game->state.has_changed = false;
 	}
 	update_enemies(game);

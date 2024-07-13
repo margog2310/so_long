@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:05:05 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/13 03:19:49 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/13 03:44:51 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_game	*create_game(char *file_path)
 	map = create_game_map(file_path);
 	if (!map)
 		return (destroy_map(map), ft_printf("Error\n"), NULL);
-	game = new_window(map->cols * TILE_SIZE, map->rows * TILE_SIZE, "Game");
+	game = new_window(map->cols * TILE_SIZE, (map->rows * TILE_SIZE) + 16, "Game");
 	if (!game || !game->mlx || !game->win)
 		return (handle_error(game), NULL);
 	game->map = map;
@@ -80,5 +80,5 @@ int	main(int argc, char *argv[])
 BONUS:
 		//1. add coin animations
 		2. enemy patrol > fix player enemy collision + has_lost game state 
-		3. display moves on screen
+		//3. display moves on screen
 */
