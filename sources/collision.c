@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 20:17:29 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/07 20:04:52 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/13 01:12:39 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@ bool	check_bounds(t_bounds object, t_bounds obstacle)
 		&& object.y + object.h > obstacle.y);
 }
 
-t_bounds	player_bounds(t_sprite *player, t_point next)
+t_bounds	sprite_bounds(t_sprite *sprite, t_point next)
 {
-	t_bounds	player_bounds;
+	t_bounds	sprite_bounds;
 
-	player_bounds.x = player->position.x + next.x;
-	player_bounds.y = player->position.y + next.y;
-	player_bounds.w = TILE_SIZE;
-	player_bounds.h = TILE_SIZE;
-	return (player_bounds);
+	sprite_bounds.x = sprite->position.x + next.x;
+	sprite_bounds.y = sprite->position.y + next.y;
+	sprite_bounds.w = TILE_SIZE;
+	sprite_bounds.h = TILE_SIZE;
+	return (sprite_bounds);
 }
 
-bool	check_wall_collision(t_game *game, t_bounds player)
+bool	check_wall_collision(t_game *game, t_bounds sprite)
 {
 	t_point		position;
 	t_bounds	obstacle;
@@ -45,7 +45,7 @@ bool	check_wall_collision(t_game *game, t_bounds player)
 			{
 				obstacle = (t_bounds){position.x * TILE_SIZE, position.y
 					* TILE_SIZE, TILE_SIZE, TILE_SIZE};
-				if (check_bounds(player, obstacle))
+				if (check_bounds(sprite, obstacle))
 					return (true);
 			}
 			position.x++;
@@ -72,6 +72,8 @@ void	collect_coins(t_game *game, t_bounds player)
 					* TILE_SIZE, TILE_SIZE, TILE_SIZE};
 				if (check_bounds(player, coin))
 				{
+					remove_coin(game->map, (t_point){position.x * TILE_SIZE,
+						position.y * TILE_SIZE});
 					game->map->grid[position.y][position.x] = SPACE;
 					game->map->coin_count--;
 				}

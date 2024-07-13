@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:18:10 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/07 20:26:34 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/13 02:16:57 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,23 @@ int	handle_input(int keysym, t_game *game)
 	return (0);
 }
 
+void	update_enemies(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < game->enemy_index)
+	{
+		enemy_patrol(game, game->goombas[i]);
+		i++;
+	}
+}
+
 bool	check_collision(t_game *game, t_point next)
 {
 	t_bounds	player;
 
-	player = player_bounds(game->player, next);
+	player = sprite_bounds(game->player, next);
 	if (check_wall_collision(game, player))
 		return (true);
 	collect_coins(game, player);

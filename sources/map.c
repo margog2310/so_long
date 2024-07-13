@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:27:15 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/07 18:06:08 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/12 22:25:04 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ t_img	*create_texture(t_game *game, char *asset_path)
 // load all textures
 void	initialise_textures(t_game *game)
 {
-	game->map->coin = create_texture(game, COLLECTIBLE);
 	game->map->wall = create_texture(game, PLATFORM);
 	game->map->exit = create_texture(game, FINISH);
 }

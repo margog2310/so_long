@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:50:01 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/04 18:11:14 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/12 22:05:27 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_map	*read_file(int fd, t_map *map)
 	}
 	map->cols = ft_strlen(map->grid[0]) - 1;
 	map->rows = line_count;
+	map->coins = NULL;
 	if (check_map_errors(map) != true)
 		return (NULL);
 	return (map);

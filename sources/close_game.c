@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:59:23 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/07 22:44:55 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/13 02:08:57 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,14 @@ void	destroy_map(t_map *map)
 {
 	if (map)
 	{
+		if (map->coins)
+		{
+			while (--map->coin_count >= 0)
+				destroy_coin(map->coins[map->coin_count]);
+			free(map->coins);
+		}
 		if (map->grid)
 			free_grid(map->grid, map->rows);
-		if (map->coin)
-			free_images(map->coin);
 		if (map->wall)
 			free_images(map->wall);
 		if (map->exit)
@@ -37,20 +41,14 @@ void	destroy_map(t_map *map)
 	}
 }
 
-// destroy a texture
-void	*destroy_texture(t_img *texture)
+void	destroy_enemies(t_game *game)
 {
-	if (texture->xpm)
-		mlx_destroy_image(texture->mlx, texture->xpm);
-	free(texture);
-	return (NULL);
-}
-
-void	handle_error(t_game *game)
-{
-	ft_printf("Error\n");
-	if (game)
-		close_window(game);
+	if (game->goombas)
+	{
+		while (--game->enemy_index >= 0)
+			destroy_sprite(game->goombas[game->enemy_index]);
+		free(game->goombas);
+	}
 }
 
 int	close_window(t_game *game)
@@ -75,4 +73,11 @@ int	close_window(t_game *game)
 		free(game);
 	}
 	exit(EXIT_SUCCESS);
+}
+
+void	handle_error(t_game *game)
+{
+	ft_printf("Error\n");
+	if (game)
+		close_window(game);
 }

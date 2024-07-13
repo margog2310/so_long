@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:05:05 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/07 23:04:47 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/13 02:15:44 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@ t_game	*create_game(char *file_path)
 		return (handle_error(game), NULL);
 	game->map = map;
 	initialise_game_state(game);
-	initialise_textures(game);
-	initialize_player(game);
-	initialize_enemies(game);
-	load_textures(game);
 	return (game);
 }
 
@@ -38,6 +34,11 @@ void	initialise_game_state(t_game *game)
 	game->state.has_changed = true;
 	game->state.has_won = false;
 	game->state.has_lost = false;
+	initialise_textures(game);
+	initialize_player(game);
+	initialise_coins(game);
+	initialize_enemies(game);
+	load_textures(game);
 }
 
 int	game_loop(t_game *game)
@@ -72,7 +73,7 @@ int	main(int argc, char *argv[])
 
 /*
 BONUS:
-		1. add coin animations
+		//1. add coin animations
 		2. enemy patrol
 		3. display moves on screen
 */
