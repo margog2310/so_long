@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:05:05 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/13 02:15:44 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/13 03:19:49 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ int	game_loop(t_game *game)
 		render_all(game);
 	if (game->state.has_won)
 		close_window(game);
+	if (game->state.has_lost)
+	{
+		update_player_animation(game, game->player);
+		//close_window(game);
+	}
 	return (0);
 }
 
@@ -74,6 +79,6 @@ int	main(int argc, char *argv[])
 /*
 BONUS:
 		//1. add coin animations
-		2. enemy patrol
+		2. enemy patrol > fix player enemy collision + has_lost game state 
 		3. display moves on screen
 */

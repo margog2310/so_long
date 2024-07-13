@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:08:21 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/13 02:27:00 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/13 03:06:59 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ int	render_all(t_game *game)
 	return (0);
 }
 
+void	update_enemies(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < game->enemy_index)
+	{
+		enemy_patrol(game, game->goombas[i]);
+		i++;
+	}
+}
 
 void	update_animations(t_game *game)
 {

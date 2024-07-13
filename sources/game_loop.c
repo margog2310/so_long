@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:18:10 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/13 02:16:57 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/13 03:18:39 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,22 @@ int	handle_input(int keysym, t_game *game)
 	return (0);
 }
 
-void	update_enemies(t_game *game)
+bool	player_enemy_collision(t_game *game, t_bounds player)
 {
-	int	i;
+    int	i;
+	t_sprite	*enemy;
+    t_bounds	enemy_bounds;
 
-	i = 0;
+    i = 0;
 	while (i < game->enemy_index)
-	{
-		enemy_patrol(game, game->goombas[i]);
+    {
+        enemy = game->goombas[i];
+        enemy_bounds = sprite_bounds(enemy, (t_point){0, 0});
+        if (check_bounds(player, enemy_bounds))
+            return (true);
 		i++;
-	}
+    }
+    return (false);
 }
 
 bool	check_collision(t_game *game, t_point next)
@@ -61,6 +67,13 @@ bool	check_collision(t_game *game, t_point next)
 	if (check_wall_collision(game, player))
 		return (true);
 	collect_coins(game, player);
+	if (player_enemy_collision(game, player))
+	{
+		game->player->is_dead = true;
+		game->player->is_moving = false;
+		game->state.has_lost = true;
+		return (true);
+	}
 	if (has_won(game, player))
 	{
 		game->state.has_won = true;

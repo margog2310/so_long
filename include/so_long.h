@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/13 02:44:46 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/13 03:12:27 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,7 @@ int				enemy_patrol(t_game *game, t_sprite *goomba);
 void			update_enemies(t_game *game);
 bool			player_is_moving(t_game *game);
 // collisions
+bool			check_bounds(t_bounds object, t_bounds obstacle);
 t_bounds		sprite_bounds(t_sprite *sprite, t_point next);
 bool			check_wall_collision(t_game *game, t_bounds sprite);
 void			collect_coins(t_game *game, t_bounds player);
@@ -206,6 +207,7 @@ bool			has_won(t_game *game, t_bounds player);
 bool			check_collision(t_game *game, t_point next);
 bool			check_enemy_collision(t_game *game, t_sprite *goomba,
 					t_point next);
+bool			player_enemy_collision(t_game *game, t_bounds player);
 // maps
 int				open_file(char *path);
 t_map			*read_file(int fd, t_map *map);
