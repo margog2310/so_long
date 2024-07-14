@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:05:05 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/14 23:46:09 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/14 23:52:33 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	main(int argc, char *argv[])
 /*
 BONUS:
 		1. enemy patrol > fix player enemy collision (tweak hit boxes)
+			(for some reason coins and enemies don't function properly if there's multiple of them lmao)
 		2. clean up code + test
 		3. create default map + example maps
 */

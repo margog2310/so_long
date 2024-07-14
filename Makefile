@@ -6,7 +6,7 @@
 #    By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 20:24:28 by mganchev          #+#    #+#              #
-#    Updated: 2024/07/12 22:00:31 by mganchev         ###   ########.fr        #
+#    Updated: 2024/07/14 23:51:24 by mganchev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,6 +91,6 @@ leaks: all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) map.ber
 
 bonus_leaks: bonus
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) map.ber
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) big_map.ber
 
 .PHONY: all clean fclean re libft mlx bonus leaks
