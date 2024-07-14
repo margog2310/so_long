@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:38:31 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/13 03:15:55 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/14 18:40:21 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	update_player_animation(t_game *game, t_sprite *player)
 		if (player->direction == LEFT)
 			move_left_animation(game, player);
 	}
-	else if (!player->is_moving)
+	else if (!player->is_moving && !player->is_dead)
 		draw_sprite(game, player);
 	else if (player->is_dead)
 		mlx_put_image_to_window(game->mlx, game->win, player->dead->xpm,

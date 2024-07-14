@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 21:47:48 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/13 02:43:44 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/14 22:49:58 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,19 @@ int	enemy_patrol(t_game *game, t_sprite *goomba)
 bool	check_enemy_collision(t_game *game, t_sprite *goomba, t_point next)
 {
 	t_bounds	goomba_bounds;
+	t_bounds	player_bounds;
 
 	goomba_bounds = sprite_bounds(goomba, next);
+	player_bounds = sprite_bounds(game->player, game->player->position);
 	if (check_wall_collision(game, goomba_bounds))
 		return (true);
+	if (player_enemy_collision(game, player_bounds))
+	{
+		goomba->is_moving = false;
+		game->player->is_dead = true;
+		game->player->is_moving = false;
+		game->state.has_lost = true;
+		return (true);
+	}
 	return (false);
 }

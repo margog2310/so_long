@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:05:05 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/13 03:47:29 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/14 23:46:09 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ t_game	*create_game(char *file_path)
 	map = create_game_map(file_path);
 	if (!map)
 		return (destroy_map(map), ft_printf("Error\n"), NULL);
-	game = new_window(map->cols * TILE_SIZE, (map->rows * TILE_SIZE) + 16, "Game");
+	game = new_window(map->cols * TILE_SIZE, (map->rows * TILE_SIZE) + 16,
+			"Super Mario");
 	if (!game || !game->mlx || !game->win)
 		return (handle_error(game), NULL);
 	game->map = map;
+	game->file_path = file_path;
 	initialise_game_state(game);
 	return (game);
 }
@@ -44,13 +46,18 @@ void	initialise_game_state(t_game *game)
 int	game_loop(t_game *game)
 {
 	if (game->state.is_running)
+	{
+		update_game_state(game);
 		render_all(game);
+	}
 	if (game->state.has_won)
 		close_window(game);
 	if (game->state.has_lost)
 	{
 		update_player_animation(game, game->player);
-		//close_window(game);
+		usleep(250000);
+		close_window(game);
+		return (1);
 	}
 	return (0);
 }
@@ -78,8 +85,7 @@ int	main(int argc, char *argv[])
 
 /*
 BONUS:
-		//1. add coin animations
-		2. enemy patrol > fix player enemy collision + has_lost game state 
-		//3. display moves on screen
-		4. clean up code + test
+		1. enemy patrol > fix player enemy collision (tweak hit boxes)
+		2. clean up code + test
+		3. create default map + example maps
 */

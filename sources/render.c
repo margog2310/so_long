@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:08:21 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/13 03:41:35 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/14 23:18:10 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,35 @@ int	render_all(t_game *game)
 				* TILE_SIZE), 0x000000}, game);
 		load_textures(game);
 		update_player_animation(game, game->player);
-		// draw_sprite(game, game->goombas[0]);
 		print_moves(game);
 		game->state.has_changed = false;
 	}
 	update_enemies(game);
 	update_animations(game);
 	return (0);
+}
+
+void	update_game_state(t_game *game)
+{
+    t_bounds	player_bounds;
+    int			i;
+    t_sprite	*enemy;
+    t_bounds	enemy_bounds;
+
+    player_bounds = sprite_bounds(game->player, game->player->position);
+    i = 0;
+    while (i < game->enemy_index)
+    {
+        enemy = game->goombas[i];
+        enemy_bounds = sprite_bounds(enemy, enemy->position);
+        if (player_enemy_collision(game, player_bounds))
+        {
+            game->player->is_dead = true;
+            game->player->is_moving = false;
+            game->state.has_lost = true;
+        }
+        i++;
+    }
 }
 
 void	update_enemies(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:18:10 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/13 03:41:20 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/14 23:20:36 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ bool	player_enemy_collision(t_game *game, t_bounds player)
 	while (i < game->enemy_index)
     {
         enemy = game->goombas[i];
-        enemy_bounds = sprite_bounds(enemy, (t_point){0, 0});
+        enemy_bounds = sprite_bounds(enemy, enemy->position);
         if (check_bounds(player, enemy_bounds))
             return (true);
 		i++;

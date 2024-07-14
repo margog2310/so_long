@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/13 03:12:27 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/14 23:42:43 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ typedef struct s_game
 	int			endian;
 	int			move_counter;
 	int			enemy_index;
+	char		*file_path;
 	t_state		state;
 	t_map		*map;
 	t_sprite	*player;
@@ -177,6 +178,7 @@ t_game			*create_game(char *file_path);
 void			initialise_game_state(t_game *game);
 void			initialise_coins(t_game *game);
 int				game_loop(t_game *game);
+void			update_game_state(t_game *game);
 int				render_all(t_game *game);
 bool			game_is_running(t_game *game);
 int				handle_input(int keysym, t_game *game);
