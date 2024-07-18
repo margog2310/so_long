@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/18 22:29:26 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/18 23:57:27 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define TILE_SIZE 32
 # define SPEED 8
 
-# define DELAY 0.075
+# define COIN_DELAY 0.075
 # define PATROL_DELAY 0.25
 
 # define UP 0
@@ -60,7 +60,6 @@
 # define MARIO_DEAD "./assets/mario_dead.xpm"
 # define ENEMY_ANIM1 "./assets/goomba_walk_1.xpm"
 # define ENEMY_ANIM2 "./assets/goomba_walk_2.xpm"
-# define ENEMY_DEAD "./assets/goomba_dead.xpm"
 // map tiles
 # define PLATFORM "./assets/block.xpm"
 # define COIN_ANIM1 "./assets/coin_1.xpm"
@@ -93,12 +92,6 @@ typedef struct s_bgn
 	int			colour;
 }				t_bgn;
 
-enum			sprite
-{
-	PLAYER,
-	ENEMY,
-	COINS,
-};
 typedef struct s_animation
 {
 	t_img		**frames;
@@ -106,7 +99,6 @@ typedef struct s_animation
 	int			h;
 	int			frame_count;
 	int			current_frame;
-	// enum sprite	sprite;
 }				t_animation;
 
 typedef struct s_coin
@@ -114,6 +106,7 @@ typedef struct s_coin
 	t_animation	*animations;
 	t_point		position;
 	clock_t		last_frame_time;
+	double		delay;
 }				t_coin;
 
 typedef struct s_sprite
@@ -122,6 +115,8 @@ typedef struct s_sprite
 	t_img		*texture;
 	t_img		*dead;
 	t_point		position;
+	t_point		previous;
+	clock_t		last_move;
 	bool		is_moving;
 	bool		is_dead;
 	int			direction;

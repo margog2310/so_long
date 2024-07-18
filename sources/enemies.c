@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 21:47:48 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/18 21:21:58 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/18 22:54:42 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_sprite	*create_goomba(t_game *game, t_sprite *goomba, int x, int y)
 	goomba->animations = game->goomba_animations;
 	goomba->is_moving = true;
 	goomba->dead = NULL;
+	goomba->previous = (t_point){0, 0};
+	goomba->last_move = 0;
 	mlx_put_image_to_window(game->mlx, game->win, goomba->texture->xpm, x, y);
 	return (goomba);
 }
@@ -61,12 +63,12 @@ void	initialize_enemies(t_game *game)
 
 int	enemy_patrol(t_game *game, t_sprite *goomba)
 {
-	static clock_t	last_move = 0;
-	clock_t			current_time;
-	double			time_since_last_move;
+	clock_t	current_time;
+	double	time_since_last_move;
 
 	current_time = clock();
-	time_since_last_move = (double)(current_time - last_move) / CLOCKS_PER_SEC;
+	time_since_last_move = (double)(current_time - goomba->last_move)
+		/ CLOCKS_PER_SEC;
 	if (time_since_last_move >= PATROL_DELAY)
 	{
 		if (goomba->direction == LEFT)
@@ -83,7 +85,7 @@ int	enemy_patrol(t_game *game, t_sprite *goomba)
 			else
 				goomba->direction = LEFT;
 		}
-		last_move = current_time;
+		goomba->last_move = current_time;
 	}
 	return (0);
 }

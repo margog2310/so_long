@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 21:35:32 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/18 22:38:31 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/18 23:00:30 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_coin	*create_coin(t_coin *coin, int x, int y)
 	coin->position.x = x;
 	coin->position.y = y;
 	coin->last_frame_time = 0;
+	coin->delay = COIN_DELAY;
 	return (coin);
 }
 

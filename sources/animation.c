@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:38:31 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/18 22:17:40 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/18 23:00:53 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,18 @@ void	update_player_animation(t_game *game, t_sprite *player)
 
 void	update_goomba_animation(t_game *game, t_sprite *goomba)
 {
-	static t_point	previous = {0, 0};
-	void			*blank;
+	void	*blank;
 
 	if (goomba)
 	{
-		if (previous.x == 0 && previous.y == 0)
-			previous = goomba->position;
-		if (goomba->position.x != previous.x
-			|| goomba->position.y != previous.y)
+		if (goomba->previous.x == 0 && goomba->previous.y == 0)
+			goomba->previous = goomba->position;
+		if (goomba->position.x != goomba->previous.x
+			|| goomba->position.y != goomba->previous.y)
 		{
 			blank = mlx_new_image(game->mlx, TILE_SIZE, TILE_SIZE);
-			mlx_put_image_to_window(game->mlx, game->win, blank, previous.x,
-				previous.y);
+			mlx_put_image_to_window(game->mlx, game->win, blank,
+				goomba->previous.x, goomba->previous.y);
 			mlx_destroy_image(game->mlx, blank);
 		}
 		mlx_put_image_to_window(game->mlx, game->win,
@@ -72,14 +71,14 @@ void	update_goomba_animation(t_game *game, t_sprite *goomba)
 		goomba->animations->current_frame++;
 		if (goomba->animations->current_frame >= goomba->animations->frame_count)
 			goomba->animations->current_frame = 0;
-		previous = goomba->position;
+		goomba->previous = goomba->position;
 	}
 }
 
 void	update_coin_animation(t_game *game, t_coin *coin)
 {
-	clock_t			current_time;
-	double			time_since_last_frame;
+	clock_t	current_time;
+	double	time_since_last_frame;
 
 	if (coin)
 	{
@@ -89,7 +88,7 @@ void	update_coin_animation(t_game *game, t_coin *coin)
 		current_time = clock();
 		time_since_last_frame = (double)(current_time - coin->last_frame_time)
 			/ CLOCKS_PER_SEC;
-		if (time_since_last_frame >= DELAY)
+		if (time_since_last_frame >= coin->delay)
 		{
 			coin->animations->current_frame++;
 			if (coin->animations->current_frame >= coin->animations->frame_count)
