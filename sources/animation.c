@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:38:31 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/14 18:40:21 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/18 22:17:40 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	update_goomba_animation(t_game *game, t_sprite *goomba)
 
 void	update_coin_animation(t_game *game, t_coin *coin)
 {
-	static clock_t	last_frame_time = 0;
 	clock_t			current_time;
 	double			time_since_last_frame;
 
@@ -88,14 +87,14 @@ void	update_coin_animation(t_game *game, t_coin *coin)
 			coin->animations->frames[coin->animations->current_frame]->xpm,
 			coin->position.x, coin->position.y);
 		current_time = clock();
-		time_since_last_frame = (double)(current_time - last_frame_time)
+		time_since_last_frame = (double)(current_time - coin->last_frame_time)
 			/ CLOCKS_PER_SEC;
 		if (time_since_last_frame >= DELAY)
 		{
 			coin->animations->current_frame++;
 			if (coin->animations->current_frame >= coin->animations->frame_count)
 				coin->animations->current_frame = 0;
-			last_frame_time = current_time;
+			coin->last_frame_time = current_time;
 		}
 	}
 }

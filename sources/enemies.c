@@ -6,28 +6,28 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 21:47:48 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/14 22:49:58 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/18 21:21:58 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	initialise_enemy_textures(t_game *game, t_sprite *goomba)
+void	initialise_enemy_textures(t_game *game)
 {
-	goomba->animations = malloc(sizeof(t_animation));
-	goomba->animations->frame_count = 2;
-	goomba->animations->frames = malloc(2 * sizeof(t_img));
-	goomba->animations->frames[0] = create_texture(game, ENEMY_ANIM1);
-	goomba->animations->frames[1] = create_texture(game, ENEMY_ANIM2);
-	goomba->dead = create_texture(game, ENEMY_DEAD);
-	goomba->animations->current_frame = 0;
-	goomba->is_moving = false;
+	game->goomba_animations = malloc(sizeof(t_animation));
+	game->goomba_animations->frame_count = 2;
+	game->goomba_animations->frames = malloc(2 * sizeof(t_img));
+	game->goomba_animations->frames[0] = create_texture(game, ENEMY_ANIM1);
+	game->goomba_animations->frames[1] = create_texture(game, ENEMY_ANIM2);
+	game->goomba_animations->current_frame = 0;
 }
 
 t_sprite	*create_goomba(t_game *game, t_sprite *goomba, int x, int y)
 {
 	goomba = create_sprite(game, ENEMY_ANIM1, x, y);
-	initialise_enemy_textures(game, goomba);
+	goomba->animations = game->goomba_animations;
+	goomba->is_moving = true;
+	goomba->dead = NULL;
 	mlx_put_image_to_window(game->mlx, game->win, goomba->texture->xpm, x, y);
 	return (goomba);
 }
@@ -97,7 +97,7 @@ bool	check_enemy_collision(t_game *game, t_sprite *goomba, t_point next)
 	player_bounds = sprite_bounds(game->player, game->player->position);
 	if (check_wall_collision(game, goomba_bounds))
 		return (true);
-	if (player_enemy_collision(game, player_bounds))
+	if (player_enemy_collision(player_bounds, goomba))
 	{
 		goomba->is_moving = false;
 		game->player->is_dead = true;

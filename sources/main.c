@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:05:05 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/14 23:52:33 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/18 22:08:52 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	game_loop(t_game *game)
 	if (game->state.has_lost)
 	{
 		update_player_animation(game, game->player);
-		usleep(250000);
+		usleep(1000000);
 		close_window(game);
 		return (1);
 	}

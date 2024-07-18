@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:59:23 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/13 02:08:57 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/18 22:38:14 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,17 @@ void	destroy_map(t_map *map)
 {
 	if (map)
 	{
+		if (map->coin_animations)
+		{
+			while (--map->coin_animations->frame_count >= 0)
+				free_images(map->coin_animations->frames[map->coin_animations->frame_count]);
+			free(map->coin_animations->frames);
+			free(map->coin_animations);
+		}
 		if (map->coins)
 		{
 			while (--map->coin_count >= 0)
-				destroy_coin(map->coins[map->coin_count]);
+				free(map->coins[map->coin_count]);
 			free(map->coins);
 		}
 		if (map->grid)
@@ -43,10 +50,20 @@ void	destroy_map(t_map *map)
 
 void	destroy_enemies(t_game *game)
 {
+	if (game->goomba_animations)
+	{
+		while (--game->goomba_animations->frame_count >= 0)
+			free_images(game->goomba_animations->frames[game->goomba_animations->frame_count]);
+		free(game->goomba_animations->frames);
+		free(game->goomba_animations);
+	}
 	if (game->goombas)
 	{
 		while (--game->enemy_index >= 0)
+		{
+			game->goombas[game->enemy_index]->animations = NULL;
 			destroy_sprite(game->goombas[game->enemy_index]);
+		}
 		free(game->goombas);
 	}
 }

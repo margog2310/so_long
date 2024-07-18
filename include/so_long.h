@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/14 23:42:43 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/18 22:29:26 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ typedef struct s_coin
 {
 	t_animation	*animations;
 	t_point		position;
+	clock_t		last_frame_time;
 }				t_coin;
 
 typedef struct s_sprite
@@ -141,6 +142,7 @@ typedef struct s_map
 	int			cols;
 	int			coin_count;
 	int			coin_index;
+	t_animation	*coin_animations;
 	t_coin		**coins;
 	t_img		*wall;
 	t_img		*exit;
@@ -171,6 +173,7 @@ typedef struct s_game
 	t_map		*map;
 	t_sprite	*player;
 	t_sprite	**goombas;
+	t_animation	*goomba_animations;
 }				t_game;
 
 // game
@@ -178,7 +181,7 @@ t_game			*create_game(char *file_path);
 void			initialise_game_state(t_game *game);
 void			initialise_coins(t_game *game);
 int				game_loop(t_game *game);
-void			update_game_state(t_game *game);
+int				update_game_state(t_game *game);
 int				render_all(t_game *game);
 bool			game_is_running(t_game *game);
 int				handle_input(int keysym, t_game *game);
@@ -209,7 +212,7 @@ bool			has_won(t_game *game, t_bounds player);
 bool			check_collision(t_game *game, t_point next);
 bool			check_enemy_collision(t_game *game, t_sprite *goomba,
 					t_point next);
-bool			player_enemy_collision(t_game *game, t_bounds player);
+bool			player_enemy_collision(t_bounds player, t_sprite *goomba);
 // maps
 int				open_file(char *path);
 t_map			*read_file(int fd, t_map *map);
@@ -228,9 +231,9 @@ void			destroy_map(t_map *map);
 // textures
 t_img			*create_texture(t_game *game, char *asset_path);
 void			initialise_textures(t_game *game);
-void			initialise_coin_textures(t_game *game, t_coin *coin);
+void			initialise_coin_textures(t_game *game);
 void			initialise_player_textures(t_game *game);
-void			initialise_enemy_textures(t_game *game, t_sprite *goomba);
+void			initialise_enemy_textures(t_game *game);
 void			load_textures(t_game *game);
 // path finding
 bool			is_valid(t_map *map, bool **visited, int row, int col);
@@ -247,7 +250,7 @@ void			initialize_enemies(t_game *game);
 void			destroy_sprite(t_sprite *sprite);
 void			destroy_enemies(t_game *game);
 // animations
-void			update_animations(t_game *game);
+void			update_coins(t_game *game);
 void			move_right_animation(t_game *game, t_sprite *player);
 void			move_left_animation(t_game *game, t_sprite *player);
 void			update_player_animation(t_game *game, t_sprite *player);

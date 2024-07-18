@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:44:07 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/07 22:53:11 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/18 21:45:12 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_game	*new_window(int w, int h, char *str)
 			&game->endian);
 	game->move_counter = 0;
 	game->goombas = NULL;
+	initialise_enemy_textures(game);
 	return (game);
 }
 

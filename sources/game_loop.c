@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:18:10 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/14 23:20:36 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/18 20:57:42 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,13 @@ int	handle_input(int keysym, t_game *game)
 	return (0);
 }
 
-bool	player_enemy_collision(t_game *game, t_bounds player)
+bool	player_enemy_collision(t_bounds player, t_sprite *goomba)
 {
-    int	i;
-	t_sprite	*enemy;
-    t_bounds	enemy_bounds;
-
-    i = 0;
-	while (i < game->enemy_index)
-    {
-        enemy = game->goombas[i];
-        enemy_bounds = sprite_bounds(enemy, enemy->position);
-        if (check_bounds(player, enemy_bounds))
-            return (true);
-		i++;
-    }
+    t_bounds	goomba_bounds;
+	
+	goomba_bounds = sprite_bounds(goomba, goomba->position);
+	if (check_bounds(player, goomba_bounds))
+        return (true);
     return (false);
 }
 
@@ -67,13 +59,6 @@ bool	check_collision(t_game *game, t_point next)
 	if (check_wall_collision(game, player))
 		return (true);
 	collect_coins(game, player);
-	if (player_enemy_collision(game, player))
-	{
-		game->player->is_dead = true;
-		game->player->is_moving = false;
-		game->state.has_lost = true;
-		return (true);
-	}
 	if (has_won(game, player))
 	{
 		game->state.has_won = true;
