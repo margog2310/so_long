@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:05:05 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/19 14:01:28 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 14:52:03 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_game	*create_game(char *file_path)
 
 	map = create_game_map(file_path);
 	if (!map)
-		return (destroy_map(map), ft_printf("Error\n"), NULL);
+		return (destroy_map(map), ft_printf("Error: Invalid map\n"), NULL);
 	game = new_window(map->cols * TILE_SIZE, (map->rows * TILE_SIZE) + 16,
 			"Super Mario");
 	if (!game || !game->mlx || !game->win)
@@ -64,10 +64,18 @@ int	game_loop(t_game *game)
 
 int	main(int argc, char *argv[])
 {
+	char	*extension;
 	t_game	*game;
 
 	if (argc == 2)
 	{
+		extension = ft_strrchr(argv[1], '.');
+		if (!extension || ft_strncmp(extension, ".ber",
+				(size_t)ft_strlen(extension)) != 0)
+		{
+			ft_printf("Error: Invalid file extension.\n");
+			return (1);
+		}
 		game = create_game(argv[1]);
 		if (game)
 		{
@@ -79,7 +87,7 @@ int	main(int argc, char *argv[])
 		}
 	}
 	else
-		ft_printf("Error\n");
+		ft_printf("Error: Invalid file/arguments\n");
 	return (0);
 }
 
