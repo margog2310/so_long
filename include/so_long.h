@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/19 15:22:40 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:47:24 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,25 @@
 # define MONSTER 'M'
 
 // sprites
-# define MARIO "./assets/mario_idle.xpm"
-# define ANIM1_RIGHT "./assets/mario_run_1_right.xpm"
-# define ANIM1_LEFT "./assets/mario_run_1_left.xpm"
-# define ANIM2_RIGHT "./assets/mario_run_2_right.xpm"
-# define ANIM2_LEFT "./assets/mario_run_2_left.xpm"
-# define ANIM3_RIGHT "./assets/mario_run_3_right.xpm"
-# define ANIM3_LEFT "./assets/mario_run_3_left.xpm"
-# define MARIO_DEAD "./assets/mario_dead.xpm"
-# define ENEMY_ANIM1 "./assets/goomba_walk_1.xpm"
-# define ENEMY_ANIM2 "./assets/goomba_walk_2.xpm"
+# define MARIO "./textures/mario_idle.xpm"
+# define ANIM1_RIGHT "./textures/mario_run_1_right.xpm"
+# define ANIM1_LEFT "./textures/mario_run_1_left.xpm"
+# define ANIM2_RIGHT "./textures/mario_run_2_right.xpm"
+# define ANIM2_LEFT "./textures/mario_run_2_left.xpm"
+# define ANIM3_RIGHT "./textures/mario_run_3_right.xpm"
+# define ANIM3_LEFT "./textures/mario_run_3_left.xpm"
+# define MARIO_DEAD "./textures/mario_dead.xpm"
+# define ENEMY_ANIM1 "./textures/goomba_walk_1.xpm"
+# define ENEMY_ANIM2 "./textures/goomba_walk_2.xpm"
 // map tiles
-# define PLATFORM "./assets/block.xpm"
-# define COIN_ANIM1 "./assets/coin_1.xpm"
-# define COIN_ANIM2 "./assets/coin_2.xpm"
-# define COIN_ANIM3 "./assets/coin_3.xpm"
-# define COIN_ANIM4 "./assets/coin_4.xpm"
-# define COIN_ANIM5 "./assets/coin_5.xpm"
-# define COIN_ANIM6 "./assets/coin_6.xpm"
-# define FINISH "./assets/flagpole.xpm"
+# define PLATFORM "./textures/block.xpm"
+# define COIN_ANIM1 "./textures/coin_1.xpm"
+# define COIN_ANIM2 "./textures/coin_2.xpm"
+# define COIN_ANIM3 "./textures/coin_3.xpm"
+# define COIN_ANIM4 "./textures/coin_4.xpm"
+# define COIN_ANIM5 "./textures/coin_5.xpm"
+# define COIN_ANIM6 "./textures/coin_6.xpm"
+# define FINISH "./textures/flagpole.xpm"
 
 typedef struct s_point
 {
