@@ -6,7 +6,7 @@
 #    By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 20:24:28 by mganchev          #+#    #+#              #
-#    Updated: 2024/07/19 14:25:37 by mganchev         ###   ########.fr        #
+#    Updated: 2024/07/19 14:30:44 by mganchev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,33 +26,15 @@ SRCS = $(SRCDIR)/main.c $(SRCDIR)/game_win.c $(SRCDIR)/movement.c $(SRCDIR)/spri
 $(SRCDIR)/so_long_utils.c $(SRCDIR)/get_next_line.c $(SRCDIR)/ft_printf.c $(SRCDIR)/map_file.c \
 $(SRCDIR)/map_errors.c $(SRCDIR)/find_path.c $(SRCDIR)/map.c $(SRCDIR)/render.c \
 $(SRCDIR)/game_loop.c $(SRCDIR)/close_game.c $(SRCDIR)/collision.c $(SRCDIR)/animation.c \
-$(SRCDIR)/coins.c
-
-BONUS_SRCS = $(SRCDIR)/main.c $(SRCDIR)/game_win.c $(SRCDIR)/movement.c $(SRCDIR)/sprites.c \
-$(SRCDIR)/so_long_utils.c $(SRCDIR)/get_next_line.c $(SRCDIR)/ft_printf.c $(SRCDIR)/map_file.c \
-$(SRCDIR)/map_errors_bonus.c $(SRCDIR)/find_path.c $(SRCDIR)/map.c $(SRCDIR)/render.c \
-$(SRCDIR)/game_loop.c $(SRCDIR)/close_game.c $(SRCDIR)/collision.c $(SRCDIR)/animation.c \
 $(SRCDIR)/enemies.c $(SRCDIR)/coins.c
 
 OBJS = $(OBJDIR)/main.o $(OBJDIR)/game_win.o $(OBJDIR)/movement.o $(OBJDIR)/sprites.o \
 $(OBJDIR)/so_long_utils.o $(OBJDIR)/get_next_line.o $(OBJDIR)/ft_printf.o $(OBJDIR)/map_file.o \
 $(OBJDIR)/map_errors.o $(OBJDIR)/find_path.o $(OBJDIR)/map.o $(OBJDIR)/render.o \
 $(OBJDIR)/game_loop.o $(OBJDIR)/close_game.o $(OBJDIR)/collision.o $(OBJDIR)/animation.o \
-$(OBJDIR)/coins.o
-
-BONUS_OBJS = $(OBJDIR)/main.o $(OBJDIR)/game_win.o $(OBJDIR)/movement.o $(OBJDIR)/sprites.o \
-$(OBJDIR)/so_long_utils.o $(OBJDIR)/get_next_line.o $(OBJDIR)/ft_printf.o $(OBJDIR)/map_file.o \
-$(OBJDIR)/map_errors_bonus.o $(OBJDIR)/find_path.o $(OBJDIR)/map.o $(OBJDIR)/render.o \
-$(OBJDIR)/game_loop.o $(OBJDIR)/close_game.o $(OBJDIR)/collision.o $(OBJDIR)/animation.o \
 $(OBJDIR)/enemies.o $(OBJDIR)/coins.o
 
 all: $(OBJDIR) $(NAME)
-
-bonus: $(OBJDIR) $(BONUS_OBJS)
-	@make -C $(LIBFT)
-	@make -C $(LIBFT) bonus
-	@make -C $(MLX)
-	$(CC) $(CFLAGS) -L$(MLX) -L$(LIBFT) $(BONUS_OBJS) -lmlx -lXext -lX11 -lm -lft -o $(NAME)
 
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
@@ -88,9 +70,6 @@ test: all
 	./$(NAME)
 
 leaks: all
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) ./maps/map.ber
-
-bonus_leaks: bonus
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) ./maps/big_map.ber
 
 .PHONY: all clean fclean re libft mlx bonus leaks
