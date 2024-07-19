@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:18:10 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/18 20:57:42 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 14:01:40 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ int	handle_input(int keysym, t_game *game)
 
 bool	player_enemy_collision(t_bounds player, t_sprite *goomba)
 {
-    t_bounds	goomba_bounds;
-	
+	t_bounds	goomba_bounds;
+
 	goomba_bounds = sprite_bounds(goomba, goomba->position);
 	if (check_bounds(player, goomba_bounds))
-        return (true);
-    return (false);
+		return (true);
+	return (false);
 }
 
 bool	check_collision(t_game *game, t_point next)

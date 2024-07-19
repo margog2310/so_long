@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 21:35:32 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/18 23:00:30 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 14:21:09 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ t_coin	*create_coin(t_coin *coin, int x, int y)
 	return (coin);
 }
 
+void	place_coin(t_map *map, int i, int j)
+{
+	map->coins = ft_realloc_sl(map->coins, map->coin_index * sizeof(t_coin),
+			(map->coin_index + 1) * sizeof(t_coin));
+	map->coins[map->coin_index] = create_coin(map->coins[map->coin_index], j
+			* TILE_SIZE, i * TILE_SIZE);
+	map->coins[map->coin_index]->animations = map->coin_animations;
+	map->coin_index++;
+}
+
 void	initialise_coins(t_game *game)
 {
 	int	i;
@@ -50,15 +60,7 @@ void	initialise_coins(t_game *game)
 		while (j < game->map->grid[i][j])
 		{
 			if (game->map->grid[i][j] == COIN)
-			{
-				game->map->coins = ft_realloc_sl(game->map->coins,
-						game->map->coin_index * sizeof(t_coin),
-						(game->map->coin_index + 1) * sizeof(t_coin));
-				game->map->coins[game->map->coin_index] = create_coin(game->map->coins[game->map->coin_index],
-						j * TILE_SIZE, i * TILE_SIZE);
-				game->map->coins[game->map->coin_index]->animations = game->map->coin_animations;
-				game->map->coin_index++;
-			}
+				place_coin(game->map, i, j);
 			j++;
 		}
 		i++;

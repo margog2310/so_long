@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:16:55 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/18 23:57:27 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 14:21:39 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,6 @@ typedef struct s_game
 // game
 t_game			*create_game(char *file_path);
 void			initialise_game_state(t_game *game);
-void			initialise_coins(t_game *game);
 int				game_loop(t_game *game);
 int				update_game_state(t_game *game);
 int				render_all(t_game *game);
@@ -202,7 +201,6 @@ bool			check_bounds(t_bounds object, t_bounds obstacle);
 t_bounds		sprite_bounds(t_sprite *sprite, t_point next);
 bool			check_wall_collision(t_game *game, t_bounds sprite);
 void			collect_coins(t_game *game, t_bounds player);
-void			remove_coin(t_map *map, t_point position);
 bool			has_won(t_game *game, t_bounds player);
 bool			check_collision(t_game *game, t_point next);
 bool			check_enemy_collision(t_game *game, t_sprite *goomba,
@@ -212,7 +210,6 @@ bool			player_enemy_collision(t_bounds player, t_sprite *goomba);
 int				open_file(char *path);
 t_map			*read_file(int fd, t_map *map);
 t_map			*create_game_map(char *file_path);
-t_coin			*create_coin(t_coin *coin, int x, int y);
 int				close_file(int fd);
 void			free_grid(char **grid, int line_count);
 bool			check_line_len(t_map *map);
@@ -221,7 +218,6 @@ bool			check_repeat(t_map *map);
 bool			check_borders(t_map *map);
 bool			check_if_boxed(t_map *map);
 bool			check_map_errors(t_map *map);
-void			destroy_coin(t_coin *coin);
 void			destroy_map(t_map *map);
 // textures
 t_img			*create_texture(t_game *game, char *asset_path);
@@ -245,18 +241,18 @@ void			initialize_enemies(t_game *game);
 void			destroy_sprite(t_sprite *sprite);
 void			destroy_enemies(t_game *game);
 // animations
-void			update_coins(t_game *game);
 void			move_right_animation(t_game *game, t_sprite *player);
 void			move_left_animation(t_game *game, t_sprite *player);
 void			update_player_animation(t_game *game, t_sprite *player);
 void			update_goomba_animation(t_game *game, t_sprite *goomba);
+void			destroy_animations(t_animation *animation);
+// coins
+void			update_coins(t_game *game);
+void			initialise_coins(t_game *game);
+void			place_coin(t_map *map, int i, int j);
+t_coin			*create_coin(t_coin *coin, int x, int y);
+void			remove_coin(t_map *map, t_point position);
 void			update_coin_animation(t_game *game, t_coin *coin);
-// colours
-int				gen_trgb(int opacity, int red, int green, int blue);
-int				get_opacity(int trgb);
-int				get_r(int trgb);
-int				get_g(int trgb);
-int				get_b(int trgb);
 // misc
 char			get_char(char **grid, int line_count, int x, int y);
 void			*ft_realloc_sl(void *ptr, size_t old_size, size_t new_size);

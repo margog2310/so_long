@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:35:26 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/18 21:27:06 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 14:07:10 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,7 @@ void	destroy_sprite(t_sprite *sprite)
 	if (sprite)
 	{
 		if (sprite->animations)
-		{
-			while (--sprite->animations->frame_count >= 0)
-				free_images(sprite->animations->frames[sprite->animations->frame_count]);
-			free(sprite->animations->frames);
-			free(sprite->animations);
-		}
+			destroy_animations(sprite->animations);
 		if (sprite->texture)
 			free_images(sprite->texture);
 		if (sprite->dead)

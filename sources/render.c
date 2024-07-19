@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:08:21 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/18 22:07:44 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 13:55:18 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	update_game_state(t_game *game)
 	update_coins(game);
 	update_enemies(game);
 	return (0);
-
 }
 
 void	update_enemies(t_game *game)
@@ -45,11 +44,12 @@ void	update_enemies(t_game *game)
 	{
 		enemy_patrol(game, game->goombas[i]);
 		update_goomba_animation(game, game->goombas[i]);
-		if (player_enemy_collision(sprite_bounds(game->player, game->player->position), game->goombas[i]))
+		if (player_enemy_collision(sprite_bounds(game->player,
+					game->player->position), game->goombas[i]))
 		{
 			game->player->is_dead = true;
-            game->player->is_moving = false;
-            game->state.has_lost = true;
+			game->player->is_moving = false;
+			game->state.has_lost = true;
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 21:47:48 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/18 22:54:42 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 14:12:19 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_sprite	*create_goomba(t_game *game, t_sprite *goomba, int x, int y)
 	mlx_put_image_to_window(game->mlx, game->win, goomba->texture->xpm, x, y);
 	return (goomba);
 }
+
 void	initialize_enemies(t_game *game)
 {
 	int	i;

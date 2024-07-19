@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 22:04:04 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/12 21:16:40 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 14:12:36 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ bool	check_map_symbols(t_map *map)
 		{
 			if (map->grid[i][j] != SPACE && map->grid[i][j] != WALL
 				&& map->grid[i][j] != COIN && map->grid[i][j] != EXIT
-				&& map->grid[i][j] != START && map->grid[i][j] != MONSTER) 
+				&& map->grid[i][j] != START && map->grid[i][j] != MONSTER)
 				return (false);
 			j++;
 		}

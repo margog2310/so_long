@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:18:32 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/07 18:26:50 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 14:09:29 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,11 @@ void	*ft_realloc_sl(void *ptr, size_t old_size, size_t new_size)
 		ft_memcpy(new_ptr, ptr, new_size);
 	free(ptr);
 	return (new_ptr);
+}
+
+void	handle_error(t_game *game)
+{
+	ft_printf("Error\n");
+	if (game)
+		close_window(game);
 }

@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 20:51:11 by mganchev          #+#    #+#             */
-/*   Updated: 2024/06/11 21:44:43 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 14:24:19 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_realloc(void *ptr, size_t size)
 {
-	void *new_ptr;
+	void	*new_ptr;
 
 	if (!ptr)
 	{

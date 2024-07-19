@@ -6,7 +6,7 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:59:23 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/18 22:38:14 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 14:09:39 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,23 @@ void	*free_images(t_img *img)
 	return (NULL);
 }
 
+void	destroy_animations(t_animation *animation)
+{
+	if (animation)
+	{
+		while (--animation->frame_count >= 0)
+			free_images(animation->frames[animation->frame_count]);
+		free(animation->frames);
+		free(animation);
+	}
+}
+
 void	destroy_map(t_map *map)
 {
 	if (map)
 	{
 		if (map->coin_animations)
-		{
-			while (--map->coin_animations->frame_count >= 0)
-				free_images(map->coin_animations->frames[map->coin_animations->frame_count]);
-			free(map->coin_animations->frames);
-			free(map->coin_animations);
-		}
+			destroy_animations(map->coin_animations);
 		if (map->coins)
 		{
 			while (--map->coin_count >= 0)
@@ -51,12 +57,7 @@ void	destroy_map(t_map *map)
 void	destroy_enemies(t_game *game)
 {
 	if (game->goomba_animations)
-	{
-		while (--game->goomba_animations->frame_count >= 0)
-			free_images(game->goomba_animations->frames[game->goomba_animations->frame_count]);
-		free(game->goomba_animations->frames);
-		free(game->goomba_animations);
-	}
+		destroy_animations(game->goomba_animations);
 	if (game->goombas)
 	{
 		while (--game->enemy_index >= 0)
@@ -90,11 +91,4 @@ int	close_window(t_game *game)
 		free(game);
 	}
 	exit(EXIT_SUCCESS);
-}
-
-void	handle_error(t_game *game)
-{
-	ft_printf("Error\n");
-	if (game)
-		close_window(game);
 }
