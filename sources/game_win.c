@@ -6,12 +6,13 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:44:07 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/18 21:45:12 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:13:49 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// creates a new image
 t_img	*new_image(t_game *game)
 {
 	t_img	*img;
@@ -27,6 +28,7 @@ t_img	*new_image(t_game *game)
 	return (img);
 }
 
+// creates a new game window
 t_game	*new_window(int w, int h, char *str)
 {
 	t_game	*game;
@@ -55,7 +57,7 @@ t_game	*new_window(int w, int h, char *str)
 	return (game);
 }
 
-// move new_image and other related stuff into this function
+// creates game background
 void	draw_bgn(t_bgn bgn, t_game *game)
 {
 	unsigned short int	i;
@@ -78,9 +80,3 @@ void	draw_bgn(t_bgn bgn, t_game *game)
 	}
 	mlx_put_image_to_window(game->mlx, game->win, img->xpm, 0, 0);
 }
-
-/*my_mlx_pixel_put(&img, 1280, 900, 0x00FF0000); //buffer pixels to img
-mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-img.img = mlx_new_image(mlx, 1280, 900); //image buffer to hold pixels
-img.addr = mlx_get_game_addr(img.img, &img.bpp, &img.line_len, &img.endian);
-	//retrieves memory addr to push pixels to*/

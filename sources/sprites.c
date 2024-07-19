@@ -6,12 +6,13 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:35:26 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/19 14:07:10 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:24:37 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// creates a new sprite
 t_sprite	*create_sprite(t_game *game, char *asset_path, int x, int y)
 {
 	t_sprite	*sprite;
@@ -28,6 +29,7 @@ t_sprite	*create_sprite(t_game *game, char *asset_path, int x, int y)
 	return (sprite);
 }
 
+// locates player position on game map and places sprite
 void	initialize_player(t_game *game)
 {
 	int	i;
@@ -52,6 +54,7 @@ void	initialize_player(t_game *game)
 	}
 }
 
+// loads player textures
 void	initialise_player_textures(t_game *game)
 {
 	game->player->animations = malloc(sizeof(t_animation));
@@ -68,6 +71,7 @@ void	initialise_player_textures(t_game *game)
 	game->player->is_moving = false;
 }
 
+// clears a sprite
 void	destroy_sprite(t_sprite *sprite)
 {
 	if (sprite)

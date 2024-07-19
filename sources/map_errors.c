@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_errors_bonus.c                                 :+:      :+:    :+:   */
+/*   map_errors.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 22:04:04 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/19 14:12:36 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:15:15 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// check that map is rectangular
+// checks that map is rectangular
 bool	check_line_len(t_map *map)
 {
 	int	i;
@@ -36,7 +36,7 @@ bool	check_line_len(t_map *map)
 	return (true);
 }
 
-// check for invalid map symbols
+// checks for invalid map symbols
 bool	check_map_symbols(t_map *map)
 {
 	int	i;
@@ -59,7 +59,7 @@ bool	check_map_symbols(t_map *map)
 	return (true);
 }
 
-// check that there's one START, one EXIT and at least one COIN
+// checks that there's one START, one EXIT and at least one COIN
 bool	check_repeat(t_map *map)
 {
 	int	i;
@@ -86,7 +86,7 @@ bool	check_repeat(t_map *map)
 	return (exit == 1 && start == 1 && map->coin_count >= 1);
 }
 
-// check that map edges are WALL
+// checks that map edges are WALL
 bool	check_borders(t_map *map)
 {
 	int	i;
@@ -116,7 +116,7 @@ bool	check_borders(t_map *map)
 	return (true);
 }
 
-// check if symbols surrounded by WALL
+// checks if symbols surrounded by WALL
 bool	check_if_boxed(t_map *map)
 {
 	int	i;

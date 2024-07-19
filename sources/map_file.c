@@ -6,12 +6,13 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:50:01 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/12 22:05:27 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:16:18 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// opens map file
 int	open_file(char *path)
 {
 	int	fd;
@@ -22,6 +23,7 @@ int	open_file(char *path)
 	return (fd);
 }
 
+// reads file and extracts data into game map struct
 t_map	*read_file(int fd, t_map *map)
 {
 	int		line_count;
@@ -48,6 +50,7 @@ t_map	*read_file(int fd, t_map *map)
 	return (map);
 }
 
+// clears a grid
 void	free_grid(char **grid, int line_count)
 {
 	int	i;
@@ -61,6 +64,7 @@ void	free_grid(char **grid, int line_count)
 	free(grid);
 }
 
+// closes map file
 int	close_file(int fd)
 {
 	if (close(fd) < 0)

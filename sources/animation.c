@@ -6,12 +6,13 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:38:31 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/19 14:11:55 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:25:34 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// animating player if moving right
 void	move_right_animation(t_game *game, t_sprite *player)
 {
 	mlx_put_image_to_window(game->mlx, game->win,
@@ -22,6 +23,7 @@ void	move_right_animation(t_game *game, t_sprite *player)
 		player->animations->current_frame = 0;
 }
 
+// animating player if moving left
 void	move_left_animation(t_game *game, t_sprite *player)
 {
 	mlx_put_image_to_window(game->mlx, game->win,
@@ -33,6 +35,7 @@ void	move_left_animation(t_game *game, t_sprite *player)
 		player->animations->current_frame = 3;
 }
 
+// animate player
 void	update_player_animation(t_game *game, t_sprite *player)
 {
 	if (player->is_moving)
@@ -49,6 +52,7 @@ void	update_player_animation(t_game *game, t_sprite *player)
 			player->position.x, player->position.y);
 }
 
+// animate enemies
 void	update_goomba_animation(t_game *game, t_sprite *goomba)
 {
 	void	*blank;
@@ -76,6 +80,7 @@ void	update_goomba_animation(t_game *game, t_sprite *goomba)
 	}
 }
 
+// animate coins
 void	update_coin_animation(t_game *game, t_coin *coin)
 {
 	clock_t	current_time;

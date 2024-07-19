@@ -6,12 +6,13 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:27:15 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/18 21:45:44 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:17:26 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// creates game map from file
 t_map	*create_game_map(char *file_path)
 {
 	int		fd;
@@ -30,7 +31,7 @@ t_map	*create_game_map(char *file_path)
 	return (map);
 }
 
-// generates a texture
+// creates a texture
 t_img	*create_texture(t_game *game, char *asset_path)
 {
 	t_img	*texture;
@@ -46,14 +47,14 @@ t_img	*create_texture(t_game *game, char *asset_path)
 	return (texture);
 }
 
-// load all textures
+// loads game map textures
 void	initialise_textures(t_game *game)
 {
 	game->map->wall = create_texture(game, PLATFORM);
 	game->map->exit = create_texture(game, FINISH);
 }
 
-// check all map errors
+// checks for any map errors
 bool	check_map_errors(t_map *map)
 {
 	if (!check_line_len(map))

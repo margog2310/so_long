@@ -6,12 +6,13 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:08:21 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/19 13:55:18 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:21:12 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// rerenders all game elements reliant on key input
 int	render_all(t_game *game)
 {
 	if (game->state.has_changed)
@@ -28,6 +29,7 @@ int	render_all(t_game *game)
 	return (0);
 }
 
+// updates game elements independent of key input
 int	update_game_state(t_game *game)
 {
 	update_coins(game);
@@ -35,6 +37,7 @@ int	update_game_state(t_game *game)
 	return (0);
 }
 
+// manages all enemy states
 void	update_enemies(t_game *game)
 {
 	int	i;
@@ -55,6 +58,7 @@ void	update_enemies(t_game *game)
 	}
 }
 
+// manages all coin states
 void	update_coins(t_game *game)
 {
 	int	i;
@@ -67,6 +71,7 @@ void	update_coins(t_game *game)
 	}
 }
 
+// loads textures of static game elements
 void	load_textures(t_game *game)
 {
 	int	i;

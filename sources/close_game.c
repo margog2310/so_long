@@ -6,12 +6,13 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:59:23 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/19 14:09:39 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:04:04 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// clear an image
 void	*free_images(t_img *img)
 {
 	if (img->xpm)
@@ -21,6 +22,7 @@ void	*free_images(t_img *img)
 	return (NULL);
 }
 
+// clear animations
 void	destroy_animations(t_animation *animation)
 {
 	if (animation)
@@ -32,6 +34,7 @@ void	destroy_animations(t_animation *animation)
 	}
 }
 
+// clear game map
 void	destroy_map(t_map *map)
 {
 	if (map)
@@ -54,6 +57,7 @@ void	destroy_map(t_map *map)
 	}
 }
 
+// clear enemy array
 void	destroy_enemies(t_game *game)
 {
 	if (game->goomba_animations)
@@ -69,6 +73,7 @@ void	destroy_enemies(t_game *game)
 	}
 }
 
+// close game
 int	close_window(t_game *game)
 {
 	if (game)

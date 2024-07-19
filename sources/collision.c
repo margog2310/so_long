@@ -6,12 +6,13 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 20:17:29 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/13 01:12:39 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:07:34 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// checks bounding box
 bool	check_bounds(t_bounds object, t_bounds obstacle)
 {
 	return (object.x < obstacle.x + obstacle.w && object.x
@@ -19,6 +20,7 @@ bool	check_bounds(t_bounds object, t_bounds obstacle)
 		&& object.y + object.h > obstacle.y);
 }
 
+// creates bounding box of a sprite
 t_bounds	sprite_bounds(t_sprite *sprite, t_point next)
 {
 	t_bounds	sprite_bounds;
@@ -30,6 +32,7 @@ t_bounds	sprite_bounds(t_sprite *sprite, t_point next)
 	return (sprite_bounds);
 }
 
+// checks collision between sprite and walls
 bool	check_wall_collision(t_game *game, t_bounds sprite)
 {
 	t_point		position;
@@ -55,6 +58,7 @@ bool	check_wall_collision(t_game *game, t_bounds sprite)
 	return (false);
 }
 
+// manages coin collection by player
 void	collect_coins(t_game *game, t_bounds player)
 {
 	t_point		position;
@@ -84,6 +88,7 @@ void	collect_coins(t_game *game, t_bounds player)
 	}
 }
 
+// spawns exit if winning condition is met
 bool	has_won(t_game *game, t_bounds player)
 {
 	t_point		position;

@@ -6,12 +6,13 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 21:05:05 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/19 14:52:03 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:14:40 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// starts up game
 t_game	*create_game(char *file_path)
 {
 	t_game	*game;
@@ -30,6 +31,7 @@ t_game	*create_game(char *file_path)
 	return (game);
 }
 
+// starts up game state
 void	initialise_game_state(t_game *game)
 {
 	game->state.is_running = true;
@@ -43,6 +45,7 @@ void	initialise_game_state(t_game *game)
 	load_textures(game);
 }
 
+// manages game loop
 int	game_loop(t_game *game)
 {
 	if (game->state.is_running)

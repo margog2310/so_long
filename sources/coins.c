@@ -6,12 +6,13 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 21:35:32 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/19 14:21:09 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:05:22 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 
+// load coin textures
 void	initialise_coin_textures(t_game *game)
 {
 	game->map->coin_animations = malloc(sizeof(t_animation));
@@ -26,6 +27,7 @@ void	initialise_coin_textures(t_game *game)
 	game->map->coin_animations->current_frame = 0;
 }
 
+// creates a new member of coin struct
 t_coin	*create_coin(t_coin *coin, int x, int y)
 {
 	coin = malloc(sizeof(t_coin));
@@ -36,6 +38,7 @@ t_coin	*create_coin(t_coin *coin, int x, int y)
 	return (coin);
 }
 
+// places coin on the game map
 void	place_coin(t_map *map, int i, int j)
 {
 	map->coins = ft_realloc_sl(map->coins, map->coin_index * sizeof(t_coin),
@@ -46,6 +49,7 @@ void	place_coin(t_map *map, int i, int j)
 	map->coin_index++;
 }
 
+// iterates over map and locates coin positions
 void	initialise_coins(t_game *game)
 {
 	int	i;
@@ -67,6 +71,7 @@ void	initialise_coins(t_game *game)
 	}
 }
 
+// removes coin from map after being collected
 void	remove_coin(t_map *map, t_point position)
 {
 	int	i;

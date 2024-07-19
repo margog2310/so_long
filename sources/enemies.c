@@ -6,12 +6,13 @@
 /*   By: mganchev <mganchev@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 21:47:48 by mganchev          #+#    #+#             */
-/*   Updated: 2024/07/19 14:12:19 by mganchev         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:08:57 by mganchev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// load enemy textures
 void	initialise_enemy_textures(t_game *game)
 {
 	game->goomba_animations = malloc(sizeof(t_animation));
@@ -22,6 +23,7 @@ void	initialise_enemy_textures(t_game *game)
 	game->goomba_animations->current_frame = 0;
 }
 
+// creates an enemy
 t_sprite	*create_goomba(t_game *game, t_sprite *goomba, int x, int y)
 {
 	goomba = create_sprite(game, ENEMY_ANIM1, x, y);
@@ -34,6 +36,7 @@ t_sprite	*create_goomba(t_game *game, t_sprite *goomba, int x, int y)
 	return (goomba);
 }
 
+// locates enemy positions on map and places them
 void	initialize_enemies(t_game *game)
 {
 	int	i;
@@ -62,6 +65,7 @@ void	initialize_enemies(t_game *game)
 	}
 }
 
+// manages enemy movement
 int	enemy_patrol(t_game *game, t_sprite *goomba)
 {
 	clock_t	current_time;
@@ -91,6 +95,7 @@ int	enemy_patrol(t_game *game, t_sprite *goomba)
 	return (0);
 }
 
+// manages collisions for enemies
 bool	check_enemy_collision(t_game *game, t_sprite *goomba, t_point next)
 {
 	t_bounds	goomba_bounds;
